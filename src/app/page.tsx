@@ -1,13 +1,16 @@
-import Image from "next/image";
 import Navigation from "./components/navigation/page";
 import Hero from "./components/hero/page";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-dark-blue-bg">
+    <main className="flex min-h-screenp-24 bg-dark-blue-bg">
       <Navigation />
-      <Hero />
-      <h1>Dashboard</h1>
+      <div className="max-w-75 flex justify-center flex-col m-auto h-screen">
+        <div>
+        <h1>Dashboard</h1>
+        <Hero />
+        </div>
+      </div>
     </main>
   );
 }

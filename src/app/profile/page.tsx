@@ -1,14 +1,14 @@
 import Navigation from "../components/navigation/page";
 
-function Favorite(){
+function Profile(){
     return(
         <main className="flex min-h-screenp-24">
-            <Navigation />
+             <Navigation />
             <div>
-                <h1>Favorite</h1>
+                <h1>Profile</h1>
             </div>
         </main>
     )
 }
 
-export default Favorite;
+export default Profile;
