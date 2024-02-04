@@ -1,14 +1,14 @@
 import Navigation from "../components/navigation/page";
 
-function Favorite(){
+function Calendar(){
     return(
         <main className="flex min-h-screenp-24">
             <Navigation />
             <div>
-                <h1>Favorite</h1>
+                <h1>Calendar</h1>
             </div>
         </main>
     )
 }
 
-export default Favorite;
+export default Calendar;
