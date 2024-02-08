@@ -1,0 +1,503 @@
+[
+    {
+      "id": 1,
+      "quote": "The only way to do great work is to love what you do.",
+      "author": "Steve Jobs"
+    },
+    {
+      "id": 2,
+      "quote": "Believe you can and you're halfway there.",
+      "author": "Theodore Roosevelt"
+    },
+    {
+      "id": 3,
+      "quote": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "Eleanor Roosevelt"
+    },
+    {
+      "id": 4,
+      "quote": "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+      "author": "Winston Churchill"
+    },
+    {
+      "id": 5,
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "C.S. Lewis"
+    },
+    {
+      "id": 6,
+      "quote": "In the middle of difficulty lies opportunity.",
+      "author": "Albert Einstein"
+    },
+    {
+      "id": 7,
+      "quote": "It does not matter how slowly you go as long as you do not stop.",
+      "author": "Confucius"
+    },
+    {
+      "id": 8,
+      "quote": "You miss 100% of the shots you don't take.",
+      "author": "Wayne Gretzky"
+    },
+    {
+      "id": 9,
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Franklin D. Roosevelt"
+    },
+    {
+      "id": 10,
+      "quote": "The best way to predict the future is to invent it.",
+      "author": "Alan Kay"
+    },
+    {
+      "id": 11,
+      "quote": "Don't watch the clock; do what it does. Keep going.",
+      "author": "Sam Levenson"
+    },
+    {
+      "id": 12,
+      "quote": "Your time is limited, don't waste it living someone else's life.",
+      "author": "Steve Jobs"
+    },
+    {
+      "id": 13,
+      "quote": "It always seems impossible until it's done.",
+      "author": "Nelson Mandela"
+    },
+    {
+      "id": 14,
+      "quote": "The only place where success comes before work is in the dictionary.",
+      "author": "Vidal Sassoon"
+    },
+    {
+      "id": 15,
+      "quote": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers"
+    },
+    {
+      "id": 16,
+      "quote": "You don't have to be great to start, but you have to start to be great.",
+      "author": "Zig Ziglar"
+    },
+    {
+      "id": 17,
+      "quote": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney"
+    },
+    {
+      "id": 18,
+      "quote": "Either you run the day, or the day runs you.",
+      "author": "Jim Rohn"
+    },
+    {
+      "id": 19,
+      "quote": "The only person you should try to be better than is the person you were yesterday.",
+      "author": "Anonymous"
+    },
+    {
+      "id": 20,
+      "quote": "Opportunities don't happen, you create them.",
+      "author": "Chris Grosser"
+    },
+    {
+      "id": 21,
+      "quote": "It's not whether you get knocked down, it's whether you get up.",
+      "author": "Vince Lombardi"
+    },
+    {
+      "id": 22,
+      "quote": "The secret of getting ahead is getting started.",
+      "author": "Mark Twain"
+    },
+    {
+      "id": 23,
+      "quote": "The best revenge is massive success.",
+      "author": "Frank Sinatra"
+    },
+    {
+      "id": 24,
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "Les Brown"
+    },
+    {
+      "id": 25,
+      "quote": "I never dreamed about success, I worked for it.",
+      "author": "Estee Lauder"
+    },
+    {
+      "id": 26,
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Lao Tzu"
+    },
+    {
+      "id": 27,
+      "quote": "The road to success and the road to failure are almost exactly the same.",
+      "author": "Colin R. Davis"
+    },
+    {
+      "id": 28,
+      "quote": "The only thing that stands between you and your dream is the will to try and the belief that it is actually possible.",
+      "author": "Joel Brown"
+    },
+    {
+      "id": 29,
+      "quote": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Winston Churchill"
+    },
+    {
+      "id": 30,
+      "quote": "Dream big and dare to fail.",
+      "author": "Norman Vaughan"
+    },
+    {
+      "id": 31,
+      "quote": "The only way to achieve the impossible is to believe it is possible.",
+      "author": "Charles Kingsleigh"
+    },
+    {
+      "id": 32,
+      "quote": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers"
+    },
+    {
+      "id": 33,
+      "quote": "You don't have to be great to start, but you have to start to be great.",
+      "author": "Zig Ziglar"
+    },
+    {
+      "id": 34,
+      "quote": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney"
+    },
+    {
+      "id": 35,
+      "quote": "Either you run the day, or the day runs you.",
+      "author": "Jim Rohn"
+    },
+    {
+      "id": 36,
+      "quote": "The only person you should try to be better than is the person you were yesterday.",
+      "author": "Anonymous"
+    },
+    {
+      "id": 37,
+      "quote": "Opportunities don't happen, you create them.",
+      "author": "Chris Grosser"
+    },
+    {
+      "id": 38,
+      "quote": "It's not whether you get knocked down, it's whether you get up.",
+      "author": "Vince Lombardi"
+    },
+    {
+      "id": 39,
+      "quote": "The secret of getting ahead is getting started.",
+      "author": "Mark Twain"
+    },
+    {
+      "id": 40,
+      "quote": "The best revenge is massive success.",
+      "author": "Frank Sinatra"
+    },
+    {
+      "id": 41,
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "Les Brown"
+    },
+    {
+      "id": 42,
+      "quote": "I never dreamed about success, I worked for it.",
+      "author": "Estee Lauder"
+    },
+    {
+      "id": 43,
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Lao Tzu"
+    },
+    {
+      "id": 44,
+      "quote": "The road to success and the road to failure are almost exactly the same.",
+      "author": "Colin R. Davis"
+    },
+    {
+      "id": 45,
+      "quote": "The only thing that stands between you and your dream is the will to try and the belief that it is actually possible.",
+      "author": "Joel Brown"
+    },
+    {
+      "id": 46,
+      "quote": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Winston Churchill"
+    },
+    {
+      "id": 47,
+      "quote": "Dream big and dare to fail.",
+      "author": "Norman Vaughan"
+    },
+    {
+      "id": 48,
+      "quote": "The only way to achieve the impossible is to believe it is possible.",
+      "author": "Charles Kingsleigh"
+    },
+    {
+      "id": 49,
+      "quote": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers"
+    },
+    {
+      "id": 50,
+      "quote": "You don't have to be great to start, but you have to start to be great.",
+      "author": "Zig Ziglar"
+    },
+    {
+      "id": 51,
+      "quote": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney"
+    },
+    {
+      "id": 52,
+      "quote": "Either you run the day, or the day runs you.",
+      "author": "Jim Rohn"
+    },
+    {
+      "id": 53,
+      "quote": "The only person you should try to be better than is the person you were yesterday.",
+      "author": "Anonymous"
+    },
+    {
+      "id": 54,
+      "quote": "Opportunities don't happen, you create them.",
+      "author": "Chris Grosser"
+    },
+    {
+      "id": 55,
+      "quote": "It's not whether you get knocked down, it's whether you get up.",
+      "author": "Vince Lombardi"
+    },
+    {
+      "id": 56,
+      "quote": "The secret of getting ahead is getting started.",
+      "author": "Mark Twain"
+    },
+    {
+      "id": 57,
+      "quote": "The best revenge is massive success.",
+      "author": "Frank Sinatra"
+    },
+    {
+      "id": 58,
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "Les Brown"
+    },
+    {
+      "id": 59,
+      "quote": "I never dreamed about success, I worked for it.",
+      "author": "Estee Lauder"
+    },
+    {
+      "id": 60,
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Lao Tzu"
+    },
+    {
+      "id": 61,
+      "quote": "The road to success and the road to failure are almost exactly the same.",
+      "author": "Colin R. Davis"
+    },
+    {
+      "id": 62,
+      "quote": "The only thing that stands between you and your dream is the will to try and the belief that it is actually possible.",
+      "author": "Joel Brown"
+    },
+    {
+      "id": 63,
+      "quote": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Winston Churchill"
+    },
+    {
+      "id": 64,
+      "quote": "Dream big and dare to fail.",
+      "author": "Norman Vaughan"
+    },
+    {
+      "id": 65,
+      "quote": "The only way to achieve the impossible is to believe it is possible.",
+      "author": "Charles Kingsleigh"
+    },
+    {
+      "id": 66,
+      "quote": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers"
+    },
+    {
+      "id": 67,
+      "quote": "You don't have to be great to start, but you have to start to be great.",
+      "author": "Zig Ziglar"
+    },
+    {
+      "id": 68,
+      "quote": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney"
+    },
+    {
+      "id": 69,
+      "quote": "Either you run the day, or the day runs you.",
+      "author": "Jim Rohn"
+    },
+    {
+      "id": 70,
+      "quote": "The only person you should try to be better than is the person you were yesterday.",
+      "author": "Anonymous"
+    },
+    {
+      "id": 71,
+      "quote": "Opportunities don't happen, you create them.",
+      "author": "Chris Grosser"
+    },
+    {
+      "id": 72,
+      "quote": "It's not whether you get knocked down, it's whether you get up.",
+      "author": "Vince Lombardi"
+    },
+    {
+      "id": 73,
+      "quote": "The secret of getting ahead is getting started.",
+      "author": "Mark Twain"
+    },
+    {
+      "id": 74,
+      "quote": "The best revenge is massive success.",
+      "author": "Frank Sinatra"
+    },
+    {
+      "id": 75,
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "Les Brown"
+    },
+    {
+      "id": 76,
+      "quote": "I never dreamed about success, I worked for it.",
+      "author": "Estee Lauder"
+    },
+    {
+      "id": 77,
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Lao Tzu"
+    },
+    {
+      "id": 78,
+      "quote": "The road to success and the road to failure are almost exactly the same.",
+      "author": "Colin R. Davis"
+    },
+    {
+      "id": 79,
+      "quote": "The only thing that stands between you and your dream is the will to try and the belief that it is actually possible.",
+      "author": "Joel Brown"
+    },
+    {
+      "id": 80,
+      "quote": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Winston Churchill"
+    },
+    {
+      "id": 81,
+      "quote": "Dream big and dare to fail.",
+      "author": "Norman Vaughan"
+    },
+    {
+      "id": 82,
+      "quote": "The only way to achieve the impossible is to believe it is possible.",
+      "author": "Charles Kingsleigh"
+    },
+    {
+      "id": 83,
+      "quote": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers"
+    },
+    {
+      "id": 84,
+      "quote": "You don't have to be great to start, but you have to start to be great.",
+      "author": "Zig Ziglar"
+    },
+    {
+      "id": 85,
+      "quote": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney"
+    },
+    {
+      "id": 86,
+      "quote": "Either you run the day, or the day runs you.",
+      "author": "Jim Rohn"
+    },
+    {
+      "id": 87,
+      "quote": "The only person you should try to be better than is the person you were yesterday.",
+      "author": "Anonymous"
+    },
+    {
+      "id": 88,
+      "quote": "Opportunities don't happen, you create them.",
+      "author": "Chris Grosser"
+    },
+    {
+      "id": 89,
+      "quote": "It's not whether you get knocked down, it's whether you get up.",
+      "author": "Vince Lombardi"
+    },
+    {
+      "id": 90,
+      "quote": "The secret of getting ahead is getting started.",
+      "author": "Mark Twain"
+    },
+    {
+      "id": 91,
+      "quote": "The best revenge is massive success.",
+      "author": "Frank Sinatra"
+    },
+    {
+      "id": 92,
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "Les Brown"
+    },
+    {
+      "id": 93,
+      "quote": "I never dreamed about success, I worked for it.",
+      "author": "Estee Lauder"
+    },
+    {
+      "id": 94,
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Lao Tzu"
+    },
+    {
+      "id": 95,
+      "quote": "The road to success and the road to failure are almost exactly the same.",
+      "author": "Colin R. Davis"
+    },
+    {
+      "id": 96,
+      "quote": "The only thing that stands between you and your dream is the will to try and the belief that it is actually possible.",
+      "author": "Joel Brown"
+    },
+    {
+      "id": 97,
+      "quote": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Winston Churchill"
+    },
+    {
+      "id": 98,
+      "quote": "Dream big and dare to fail.",
+      "author": "Norman Vaughan"
+    },
+    {
+      "id": 99,
+      "quote": "The only way to achieve the impossible is to believe it is possible.",
+      "author": "Charles Kingsleigh"
+    },
+    {
+      "id": 100,
+      "quote": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers"
+    }
+  ]
+  
