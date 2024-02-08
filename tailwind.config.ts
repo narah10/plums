@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        'line': 'rgba(193.26, 193.26, 193.26, 0.14)',
         'purple': '#8D3A87',
         'gray': '#F8F8F8',
         'dark-gray': '#908A8A',
@@ -24,6 +25,12 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      maxWidth: {
+        '75': '75%'
+      },
+      // minWidth: {
+      //   '25': "25%"
+      // }
     },
   },
   plugins: [],
