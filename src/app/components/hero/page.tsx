@@ -20,9 +20,9 @@ export default function Hero() {
     return (
         <div id="hero-container" className="md:flex bg-gradient-to-r from-purple p-8 rounded-xl md:justify-between shadow-xl w-full md:min-w-9xl">
             <div id="quote" className="w-3/5">
-                <h1 className="text-white text-xl font-bold py-1">Quote of the day</h1>
-                <p className="text-white py-1">{quote}</p>
-                <h2 className="text-white font-light py-1">{author}</h2>
+                <h1 className="text-white text-xl font-bold py-1 md:text-2xl">Quote of the day</h1>
+                <p className="text-white py-1 md:text-lg">{quote}</p>
+                <h2 className="text-white font-light py-1 text-md">{author}</h2>
             </div>
             <div id="add-task-btn" className="bg-gray md:py-5 md:px-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
                 <p className="text-dark-purple md:mb-4 flex p-3"><span className="md:hidden">Add&nbsp;</span>New Topic</p>
