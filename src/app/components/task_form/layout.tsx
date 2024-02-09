@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Hero'
+    title: 'Add New Task'
 }
 
-export default function HeroLayout({
+export default function TaskFormLayout({
     children,
 }: {
     children: React.ReactNode;
