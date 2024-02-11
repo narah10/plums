@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Quote from '../../../models/quotes';
 import quotesList from '../../../data/quotes.json';
+import { Dialog } from '@headlessui/react';
+import AddNewTask from '../task_form/page';
 
 export default function Hero() {
     const [quote, setQuote] = useState<string>("");
@@ -17,6 +19,8 @@ export default function Hero() {
         setAuthor(randomQuote.author);
     }, []);
 
+    let [isOpen, setIsOpen] = useState(false);
+
     return (
         <div id="hero-container" className="md:flex bg-gradient-to-r from-purple p-8 rounded-xl md:justify-between shadow-xl w-full md:min-w-9xl">
             <div id="quote" className="w-3/5">
@@ -24,7 +28,7 @@ export default function Hero() {
                 <p className="text-white py-1 md:text-lg">{quote}</p>
                 <h2 className="text-white font-light py-1 text-md">{author}</h2>
             </div>
-            <button type="button">
+            <button onClick={() => setIsOpen(true)}>
                 <div id="add-task-btn" className="bg-gray md:py-5 md:px-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
                     <p className="text-dark-purple flex p-3"><span className="md:hidden">Add&nbsp;</span>New Topic</p>
                     <div className="hidden md:block md:mb-4">
@@ -34,6 +38,11 @@ export default function Hero() {
                     </div>
                 </div>
             </button>
+            <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+                <Dialog.Panel>
+                    <AddNewTask />
+                </Dialog.Panel>
+            </Dialog>
         </div>
     );
 }
