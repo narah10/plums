@@ -2,6 +2,7 @@
 
 import Navigation from "./components/navigation/page";
 import Hero from "./components/hero/page";
+import AddNewTask from "./components/task_form/page";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <h1 className="text-white md:text-4xl font-bold md:py-5">Dashboard</h1>
         <Hero />
         </div>
+      {/* <AddNewTask /> */}
       </div>
     </main>
   );
