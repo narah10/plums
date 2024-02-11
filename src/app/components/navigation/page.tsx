@@ -26,7 +26,7 @@ function Navigation() {
             <div className="py-10 h-20 mb-10 pl-10">
                 <Image alt="" src={'/assets/dark-logo.svg'} width="200" height="200" />
             </div>
-            <ul className="pl-10 flex flex-col py-10 pr-4 pl-50">
+            <ul className="pl-10 flex flex-col py-6 pr-4 pl-50">
                 <li className='hover:bg-btn-purple py-1 rounded-md mb-2'>
                     <Link href="/" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200">
                     <span className="text-lg font-medium pl-1">Dashboard</span>
