@@ -12,7 +12,6 @@ export default function Home() {
         <h1 className="text-white text-4xl font-semibold py-5">Dashboard</h1>
         <Hero />
         </div>
-      {/* <AddNewTask /> */}
     </main>
   );
 }
