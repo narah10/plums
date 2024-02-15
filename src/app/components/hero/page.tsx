@@ -39,6 +39,7 @@ export default function Hero() {
                 </div>
             </button>
             <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+            <div className="fixed inset-0 bg-dark-blue-bg bg-opacity-85 " aria-hidden="true" />
                 <Dialog.Panel>
                     <AddNewTask />
                 </Dialog.Panel>
