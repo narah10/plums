@@ -2,6 +2,8 @@ import Navigation from "./components/navigation/page";
 import Hero from "./components/hero/page";
 import AddNewTask from "./components/task_form/page";
 import SearchBar from "./components/SearchBar";
+import DashFavorite from "./components/Dash-Favorite";
+import Recents from "./components/Recents";
 
 export default function Home() {
   return (
@@ -15,6 +17,8 @@ export default function Home() {
           <SearchBar />
         </div>
         <Hero />
+        <DashFavorite />
+        <Recents />
         </div>
     </main>
   );
