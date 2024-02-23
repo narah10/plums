@@ -2,6 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+input {
+  @apply px-2;
+}
+  .fc-header-toolbar {
+    display: inline-block;
+    padding: 4px 4px;
+    
+    @apply space-x-8;
+}
+
+.fc-day {
+  @apply m-8;
+}
+
+.fc-scrollgrid-sync-table {
+  @apply w-full;
+}
+
+.fc-view {
+  @apply w-full h-full lg:h-3/4 xl:h-2/3 bg-white;
+}
+
+.fc-h-event {
+  @apply bg-btn-purple border border-tips-purple ;
+  
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-violet-100 ;
+}
+
+.fc .fc-button{
+  @apply bg-btn-purple hover:bg-tips-purple  ;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  @apply bg-tips-purple;
+}
+
+.fc .fc-button-primary:disabled {
+  @apply bg-tips-purple;
+}
+.fc-v-event {
+  @apply bg-btn-purple border border-tips-purple ;
+  
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -28,3 +75,4 @@ body {
     text-wrap: balance;
   }
 }
+

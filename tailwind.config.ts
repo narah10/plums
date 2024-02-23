@@ -20,6 +20,7 @@ const config: Config = {
         'dark-purple': '#734A73',
         'dark-blue-bg': '#202442',
         'tips-purple': '#5c1864',
+        'lighter-blue': '#453B6C',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
