@@ -1,6 +1,6 @@
 export default function DashFavorite(){
   return(
-    <section className=" bg-gray text-black rounded-lg p-5 m-5 lg:w-1/2 md:w-3/4 w-full">
+    <section className=" bg-gray text-black rounded-lg p-5 m-5 w-full">
         <h1 className="text-2xl">Favorites</h1>
         <div className="flex flex-col m-3">
           <ul className="[&>*:nth-child(odd)]:bg-slate-200">
