@@ -1,9 +1,9 @@
 import Navigation from "./components/navigation/page";
 import Hero from "./components/hero/page";
-import AddNewTask from "./components/task_form/page";
 import SearchBar from "./components/SearchBar";
 import DashFavorite from "./components/Dash-Favorite";
 import Recents from "./components/Recents";
+import DashCalendar from "./components/Dash-Calendar";
 
 export default function Home() {
   return (
@@ -17,8 +17,15 @@ export default function Home() {
           <SearchBar />
         </div>
         <Hero />
-        <DashFavorite />
-        <Recents />
+          <div className="flex justify-between align-center">
+            <div className="w-full">
+            <DashFavorite />
+            <Recents />
+            </div>
+            <div className="w-full ml-10 mt-5">
+            <DashCalendar />
+            </div>
+          </div>
         </div>
     </main>
   );
