@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Categories'
+    title: 'Notes'
 }
 
-export default function CategoriesLayout({
+export default function NotesLayout({
     children,
 }: {
     children: React.ReactNode;
