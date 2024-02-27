@@ -97,8 +97,10 @@ export default function Calendar() {
 
   return (
       <main className="flex overflow-hidden">
-        <Navigation />
         <div className="flex min-h-screen flex-col items-center justify-between p-24 text-purple w-full">
+        <div className="flex-none">
+            <Navigation />
+        </div>
         {isLargeScreen ? (
             <div className="grid grid-cols-12 w-full m-auto overflow-visible">
             <div className="col-span-12">
@@ -126,8 +128,9 @@ export default function Calendar() {
             </div>
             </div>
         ): (
-            <div className="w-max  overflow-visible">
+            <div className="w-max">
             <FullCalendar
+            height='100vh'
             initialView='timeGridDay'
             plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
             headerToolbar={{ 
@@ -280,6 +283,6 @@ export default function Calendar() {
           </Dialog>
         </Transition.Root>
         </div>
-      </main >
+  </main >
   )
 }
