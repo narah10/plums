@@ -26,7 +26,7 @@ export default function Home() {
           <SearchBar onSearch={handleSearch} />
         </div>
         <Hero />
-        <div className="flex justify-between align-center">
+        <div className="md:flex md:justify-between md:align-center block overflow-x-hidden">
           <div className="w-full">
             <DashFavorite />
             <Recents />
