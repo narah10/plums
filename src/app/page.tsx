@@ -20,18 +20,18 @@ export default function Home() {
       <div className="flex-none">
         <Navigation />
       </div>
-      <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-5">
+      <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-0">
         <div className="flex lg:flex-row pb-10 flex-col justify-between lg:items-center">
           <h1 className="text-white text-4xl font-semibold py-5 w-full">Dashboard</h1>
           <SearchBar onSearch={handleSearch} />
         </div>
         <Hero />
-        <div className="md:flex md:justify-between md:align-center block overflow-x-hidden">
-          <div className="w-full">
+        <div className="grid gap-10 lg:grid-cols-2 ">
+          <div className="">
             <DashFavorite />
             <Recents />
           </div>
-          <div className="w-full ml-10 mt-5">
+          <div className="mt-5">
             <DashCalendar />
           </div>
         </div>
