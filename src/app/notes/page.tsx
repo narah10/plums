@@ -9,7 +9,7 @@ import AddTaskBtn from '../components/Add-Task-Btn';
 interface Note {
     name: string;
     description: string;
-    last_edited: string;
+    lastEdited: string;
 }
 
 function Notes() {
@@ -17,8 +17,26 @@ function Notes() {
     const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
 
     useEffect(() => {
-        setNotes(notesData);
-        setFilteredNotes(notesData);
+        const fetchNotes = async()=> {
+            try{
+                const response = await fetch(`/api/notes`, {
+                    next: { revalidate :3600},
+                })
+            if (!response.ok){
+                throw new Error(
+                    `Failed to fetch items: ${response.status}`
+                )
+            }
+            const data = await response.json();
+            console.log(data)
+            setNotes(data)
+            setFilteredNotes(data)
+            }
+            catch(error:any){
+                console.error(`Error fetchin items: ${error.message}`)
+            }
+        }
+        fetchNotes();
     }, []);
 
     const handleSearch = (keyword: string) => {
@@ -29,6 +47,18 @@ function Notes() {
         setFilteredNotes(filtered);
     };
 
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const month: number = date.getMonth() + 1;
+        const day: number = date.getDate();
+        const year: number = date.getFullYear();
+        
+        // Pad single digit month/day with leading zero
+        const formattedMonth: string = month < 10 ? `0${month}` : month.toString();
+        const formattedDay: string = day < 10 ? `0${day}` : day.toString();
+    
+        return `${formattedMonth}/${formattedDay}/${year}`;
+    }
 
 
     return (
@@ -49,7 +79,7 @@ function Notes() {
                                 </div>
                                 <div className="lg:w-2/3 lg:pl-4">
                                     <p className="text-gray-700 mb-2"><span className="font-semibold">Description:</span> {note.description}</p>
-                                    <p className="text-gray-500"><span className="font-semibold">Last Edited:</span> {note.last_edited}</p>
+                                    <p className="text-gray-500"><span className="font-semibold">Last Edited: </span>{formatDate(note.lastEdited)}</p>
                                 </div>
                             </div>
                         </div>

@@ -33,8 +33,8 @@ function Navigation() {
                     </Link>
                 </li>
                 <li className='hover:bg-btn-purple py-1 rounded-md mb-2'>
-                    <Link href="/profile" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200">
-                    <span className="text-lg font-medium pl-1">Profile</span>
+                    <Link href="/notes" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200">
+                    <span className="text-lg font-medium pl-1">Notes</span>
                     </Link>
                 </li>
                 <li className='hover:bg-btn-purple py-1 rounded-md mb-2'>
@@ -48,8 +48,8 @@ function Navigation() {
                     </Link>
                 </li>
                 <li className='hover:bg-btn-purple py-1 rounded-md'>
-                    <Link href="/notes" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200">
-                    <span className="text-lg font-medium pl-1">Notes</span>
+                    <Link href="/profile" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200">
+                    <span className="text-lg font-medium pl-1">Profile</span>
                     </Link>
                 </li>
             </ul>

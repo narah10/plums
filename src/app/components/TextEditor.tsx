@@ -5,6 +5,7 @@ import Quill from 'quill';
 
 export default function TextEditor() {
   const [value, setValue] = useState('');
+  // console.log(value)
   // const quill = new Quill('#editor', {
   //   modules: {
   //     toolbar: [
