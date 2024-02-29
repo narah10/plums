@@ -96,11 +96,11 @@ export default function Calendar() {
 
 
   return (
-      <main className="flex overflow-hidden">
-        <div className="flex min-h-screen flex-col items-center justify-between p-24 text-purple w-full">
-        <div className="flex-none">
-            <Navigation />
-        </div>
+  <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
+  <div className="flex-none">
+    <Navigation />
+  </div>
+  <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-5 text-purple flex min-h-screen flex-col items-center justify-between">
         {isLargeScreen ? (
             <div className="grid grid-cols-12 w-full m-auto overflow-visible">
             <div className="col-span-12">
@@ -128,7 +128,7 @@ export default function Calendar() {
             </div>
             </div>
         ): (
-            <div className="w-max">
+            <div className="w-full text-sm">
             <FullCalendar
             height='100vh'
             initialView='timeGridDay'
