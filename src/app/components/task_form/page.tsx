@@ -22,7 +22,7 @@ export default function AddNewTask() {
           console.log(formData);
         };
     return (
-        <div id='add-task-container' className="bg-gradient-to-b from-purple to-dark-blue-bg p-8 rounded-xl shadow-xl md:max-w-4xl m-auto fixed inset-10 justify-center">
+        <div id='add-task-container' className="z-50 bg-gradient-to-b from-purple to-dark-blue-bg p-8 rounded-xl shadow-xl md:max-w-4xl m-auto fixed inset-10 justify-center">
             <h1 className="text-white text-3xl font-bold text-center">Add New Task</h1>
             <form onSubmit={handleSubmit}>
                 <br></br>

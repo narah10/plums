@@ -31,7 +31,7 @@ export default function Home() {
             <DashFavorite />
             <Recents />
           </div>
-          <div className="w-full mt-5 col-span-1">
+          <div className="z-0 w-full mt-5 col-span-1">
             <DashCalendar />
           </div>
         </div>
