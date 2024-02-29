@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Navigation from "../components/navigation/page";
 import SearchBar from "../components/SearchBar";
 import notesData from "../../data/topics.json";
+import AddTaskBtn from '../components/Add-Task-Btn';
+
 
 interface Note {
     name: string;
@@ -45,6 +47,7 @@ function Notes() {
         setFilteredNotes(filtered);
     };
 
+<<<<<<< HEAD
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const month: number = date.getMonth() + 1;
@@ -57,6 +60,10 @@ function Notes() {
     
         return `${formattedMonth}/${formattedDay}/${year}`;
     }
+=======
+
+
+>>>>>>> main
     return (
         <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
             <div className="flex-none">
@@ -65,6 +72,7 @@ function Notes() {
             <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-5">
                 <h1 className="text-white text-4xl font-semibold py-5 my-2">My Notes</h1>
                 <SearchBar onSearch={handleSearch} />
+            <AddTaskBtn />
                 <div className="mt-4">
                     {filteredNotes.map((note, index) => (
                         <div key={index} className="bg-list-bg hover:bg-tips-purple rounded-lg p-4 shadow-lg mb-4">

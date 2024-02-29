@@ -33,7 +33,7 @@ export default function DashCalendar() {
     
   useEffect(() => {
     function handleResize() {
-      setIsLargeScreen(window.innerWidth > 1024);
+      setIsLargeScreen(window.innerWidth > 1000);
     }
   
     handleResize();
@@ -68,11 +68,12 @@ function addEvent(data: DropArg) {
                     right: 'dayGridMonth,timeGridWeek'
                 }}
                 events={allEvents as EventSourceInput}
+                height='auto'
                 />
             </div>
             </div>
         ): (
-            <div className="w-max  overflow-visible">
+            <div className="w-max m-auto hidden">
             <FullCalendar
             initialView='timeGridDay'
             plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
@@ -82,6 +83,7 @@ function addEvent(data: DropArg) {
                 right: 'timeGridDay'
             }}
             events={allEvents as EventSourceInput}
+            height='100vh'
           /> 
           </div>
       )
