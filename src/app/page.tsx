@@ -26,12 +26,12 @@ export default function Home() {
           <SearchBar onSearch={handleSearch} />
         </div>
         <Hero />
-        <div className="md:flex md:justify-between md:align-center block overflow-x-hidden">
-          <div className="w-full">
+        <div className="lg:flex lg:justify-between lg:align-center grid grid-cols-2 gap-5 overflow-x-hidden">
+          <div className="w-full col-span-2">
             <DashFavorite />
             <Recents />
           </div>
-          <div className="w-full ml-10 mt-5">
+          <div className="w-full mt-5 col-span-1">
             <DashCalendar />
           </div>
         </div>

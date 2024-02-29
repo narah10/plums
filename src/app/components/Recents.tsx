@@ -1,6 +1,6 @@
 export default function Recents(){
   return(
-    <section className=" bg-gray text-black rounded-lg p-5 m-5 w-full">
+    <section className=" bg-gray text-black rounded-lg p-5 my-5 w-full">
         <h1 className="text-2xl">Recents</h1>
         <div className="flex flex-col m-3">
           <ul className="[&>*:nth-child(odd)]:bg-slate-200">
