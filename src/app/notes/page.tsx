@@ -47,7 +47,6 @@ function Notes() {
         setFilteredNotes(filtered);
     };
 
-<<<<<<< HEAD
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const month: number = date.getMonth() + 1;
@@ -60,10 +59,8 @@ function Notes() {
     
         return `${formattedMonth}/${formattedDay}/${year}`;
     }
-=======
 
 
->>>>>>> main
     return (
         <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
             <div className="flex-none">
