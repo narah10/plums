@@ -6,8 +6,6 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin, { Draggable, DropArg } from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { useState, useEffect } from 'react'
-// import { Dialog, Transition } from '@headlessui/react'
-// import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import { EventSourceInput } from '@fullcalendar/core/index.js'
 
 interface Event {
@@ -33,23 +31,25 @@ export default function DashCalendar() {
     
   useEffect(() => {
     function handleResize() {
-      setIsLargeScreen(window.innerWidth > 1000);
+      setIsLargeScreen(window.innerWidth > 1600);
     }
-  
+
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-function handleDateClick(arg: { date: Date, allDay: boolean }) {
-  setNewEvent({ ...newEvent, start: arg.date, allDay: arg.allDay, id: new Date().getTime() })
-  setShowModal(true)
-}
+  const [isSmallScreen, setIsSmallScreen] = useState(true);
+    
+  useEffect(() => {
+    function handleResize() {
+      setIsSmallScreen(window.innerWidth < 1025);
+    }
 
-function addEvent(data: DropArg) {
-  const event = { ...newEvent, start: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() }
-  setAllEvents([...allEvents, event])
-}
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="text-purple">
@@ -68,25 +68,35 @@ function addEvent(data: DropArg) {
                     right: 'dayGridMonth,timeGridWeek'
                 }}
                 events={allEvents as EventSourceInput}
-                height='auto'
+                aspectRatio={1.3}
+                handleWindowResize={true}
                 />
             </div>
             </div>
         ): (
-            <div className="w-max m-auto hidden">
+          <div className="w-max m-auto">
             <FullCalendar
-            initialView='timeGridDay'
-            plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-            headerToolbar={{ 
-                left: 'prev,next', 
-                center: 'title',
-                right: 'timeGridDay'
-            }}
-            events={allEvents as EventSourceInput}
-            height='100vh'
-          /> 
+                plugins={[
+                    dayGridPlugin,
+                    interactionPlugin,
+                    timeGridPlugin
+                ]}
+                headerToolbar={{
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek'
+                }}
+                events={allEvents as EventSourceInput}
+                aspectRatio={.9}
+                handleWindowResize={true}
+                />
           </div>
       )
     }
+      {isSmallScreen ? (
+        <div className="w-max m-auto hidden">
+        <FullCalendar plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]} /> 
+      </div>
+      ): null}
   </div>
 )}
