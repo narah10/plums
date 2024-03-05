@@ -6,19 +6,6 @@ import Quill from 'quill';
 export default function TextEditor() {
   const [value, setValue] = useState('');
   // console.log(value)
-  // const quill = new Quill('#editor', {
-  //   modules: {
-  //     toolbar: [
-  //       [{ header: [1, 2, 3, 4, 5, 6, false] }],
-  //       [{ font : [] }],
-  //       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-  //       [{ list: 'ordered' }, { list: 'bullet' }],
-  //       ['image', 'code-block', 'attachments', 'link', 'video'],
-  //     ],
-  //   },
-  //   placeholder: 'Write a note...',
-  //   theme: 'snow', // or 'bubble'
-  // });
   return (
     <div className='bg-white'>
     <ReactQuill
