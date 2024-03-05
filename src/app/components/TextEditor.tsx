@@ -20,7 +20,6 @@ export default function TextEditor() {
   //   theme: 'snow', // or 'bubble'
   // });
   return (
-
     <div className='bg-white'>
     <ReactQuill
       theme='snow'
