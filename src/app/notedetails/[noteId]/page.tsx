@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Navigation from "../../components/navigation/page";
 
+
 interface Note {
     name: string;
     description: string;
@@ -129,7 +130,7 @@ const NoteDetails: React.FC = () => {
                     ) : (
                         <button 
                             type="button" 
-                            className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10 text-center shadow-xl"
+                            className="w-1/3 text-white bg-dark-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10 text-center shadow-xl"
                             onClick={handleEditModeToggle}
                         >
                             Edit Note

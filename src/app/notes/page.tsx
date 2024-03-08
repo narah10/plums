@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navigation from "../components/navigation/page";
 import SearchBar from "../components/SearchBar";
 import Link from 'next/link';
-import notesData from "../../data/topics.json";
-import AddTaskBtn from '../components/Add-Task-Btn';
+import Image from 'next/image';
 
 
 interface Note {
@@ -107,25 +106,27 @@ function Notes() {
                 </div>
                 <div className="mt-4">
                     {filteredNotes.map((note, index) => (
-                        <>
-                        <Link key={index} 
-                            href={`/notedetails?noteId=${note.id}`}
-                            as={`/notedetails/${note.id}`}
-                        onClick={()=>{console.log(note.id)}}>
-                        <div key={note.id} className="bg-list-bg hover:bg-tips-purple rounded-lg p-4 shadow-lg mb-4">
-                            <div className="flex flex-col lg:flex-row lg:items-center">
-                                <div className="lg:w-1/3 mb-2 lg:mb-0">
-                                    <h2 className="text-xl font-semibold mb-2">{note.name}</h2>
-                                </div>
-                                <div className="lg:w-2/3 lg:pl-4">
-                                    <p className="text-gray-700 mb-2"><span className="font-semibold">Description:</span> {note.description}</p>
-                                    <p className="text-gray-500"><span className="font-semibold">Last Edited: </span>{formatDate(note.lastEdited)}</p>
+                        <div className='grid grid-cols-[85%_10%] gap-7'>
+                            <Link key={index} 
+                                href={`/notedetails?noteId=${note.id}`}
+                                as={`/notedetails/${note.id}`}
+                            onClick={()=>{console.log(note.id)}}>
+                            <div key={note.id} className=" bg-list-bg hover:bg-tips-purple rounded-lg p-4 shadow-lg mb-4">
+                                <div className="flex flex-col lg:flex-row lg:items-center">
+                                    <div className="lg:w-1/3 mb-2 lg:mb-0">
+                                        <h2 className="text-xl font-semibold mb-2">{note.name}</h2>
+                                    </div>
+                                    <div className="lg:w-2/3 lg:pl-4">
+                                        <p className="text-gray-700 mb-2"><span className="font-semibold">Description:</span> {note.description}</p>
+                                        <p className="text-gray-500"><span className="font-semibold">Last Edited: </span>{formatDate(note.lastEdited)}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </Link>
-                        <button className="text-red-500 font-semibold" onClick={() => handleDelete(note.id, note.name)}>Delete</button>
-                    </>
+                        <button className="text-red-500 font-semibold" onClick={() => handleDelete(note.id, note.name)}>
+                            <Image alt="" src={'/assets/delete.svg'} width="20" height="20" />
+                        </button>
+                    </div>
                     ))}
                 </div>
             </div>
