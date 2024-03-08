@@ -12,7 +12,7 @@ function Navigation() {
   };
 
   return (
-    <div className='static'>
+    <div className='static lg:sticky lg:top-0 lg:z-50'>
         <button type="button" className="m-10 lg:hidden" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="sr-only">Toggle Navigation</span>
             <svg width="50" height="19" viewBox="0 0 37 19" fill="none" xmlns="http://www.w3.org/2000/svg">

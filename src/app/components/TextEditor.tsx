@@ -1,10 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Quill from 'quill';
 
-export default function TextEditor() {
-  const [value, setValue] = useState('');
+interface TextEditorProps {
+  handleEditorChange: (content: string) => void;
+}
+
+const TextEditor: React.FC<TextEditorProps> = ({ handleEditorChange }) => {
+  const [value, setValue] = useState<string>('');
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  useEffect(() => {
+    setValue('');
+    setRefresh(false);
+  }, [refresh]);
+
+  const handleChange = (content: string) => {
+    setValue(content);
+    handleEditorChange(content);
+  };
+
   // console.log(value)
   // const quill = new Quill('#editor', {
   //   modules: {
@@ -20,12 +36,11 @@ export default function TextEditor() {
   //   theme: 'snow', // or 'bubble'
   // });
   return (
-
     <div className='bg-white'>
     <ReactQuill
       theme='snow'
       value={value}
-      onChange={setValue}
+      onChange={handleChange}
       modules={{
         toolbar: [
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -36,8 +51,10 @@ export default function TextEditor() {
         ],
       }}
       placeholder='Write a note...'
-      className='text-slate-600 border border-white rounded-lg p-1'
+      className='text-slate-600 min-h-[200px] rounded-lg p-1'
     />
   </div>
   )
 }
+
+export default TextEditor;

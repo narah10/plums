@@ -17,7 +17,9 @@ datasource db {
 model Note {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name     String
-  description String
+  description String?
+  category String?
+  content String?
   createdAt DateTime @default(now())
   lastEdited DateTime? @updatedAt
 }
