@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
 
     // detsrtucture notesTitle from the incoming request
-    const { noteTitle, noteDescription, createdDate } = await req.json(); 
+    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent } = await req.json(); 
 
     if (!noteTitle) {
       return new NextResponse("Title required", { status: 400 });
@@ -18,11 +18,13 @@ export async function POST(req: Request) {
       data: {
         name: noteTitle,
         description: noteDescription,
+        category: noteCategory,
+        content: noteContent,
         createdAt: createdDate
       },
     });
 
-    return NextResponse.json(note, { status: 200 }); // Respond with the created note
+    return NextResponse.json(note, { status: 201 }); // Respond with the created note
   } catch (error) {
     console.log("[POST NOTE]", error);
     return new NextResponse("Internal Server Error", { status: 500 }); // Handle errors

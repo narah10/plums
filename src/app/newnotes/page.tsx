@@ -3,17 +3,12 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Navigation from "../components/navigation/page";
 import TextEditor from '../components/TextEditor';
 
-interface NoteFormData {
-    noteName: string;
-    noteDescription: string;
-    noteCategory: string;
-}
-
 export default function NewNote() {
     const [formData, setFormData] = useState({
-        taskName: '',
-        taskDescription: '',
-        taskCategory: '',
+        noteName: '',
+        noteDescription: '',
+        noteCategory: '',
+        noteContent:'',
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -24,10 +19,17 @@ export default function NewNote() {
         });
     };
 
+    const handleContentChange = (content: string) => {
+        setFormData({
+          ...formData,
+          noteContent: content,
+        });
+      };
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       try {
-          const { taskName: noteTitle, taskDescription: noteDescription } = formData;
+        const { noteName: noteTitle, noteDescription, noteCategory, noteContent } = formData; 
           const createdDate = new Date()
           
           const response = await fetch('/api/notes/create', {
@@ -35,7 +37,7 @@ export default function NewNote() {
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ noteTitle, noteDescription, createdDate }),
+              body: JSON.stringify({ noteTitle, noteDescription, createdDate, noteCategory, noteContent }),
           });
   
           if (!response.ok) {
@@ -44,9 +46,10 @@ export default function NewNote() {
   
           // Clear form data after successful submission
           setFormData({
-              taskName: '',
-              taskDescription: '',
-              taskCategory: '',
+            noteName: '',
+            noteDescription: '',
+            noteCategory: '',
+            noteContent:'',
           });
 
           console.log('Task added successfully');
@@ -60,16 +63,16 @@ export default function NewNote() {
                 <Navigation />
             </div>
             <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-5">
-            <form onSubmit={handleSubmit}>
+            <form autoComplete="off" onSubmit={handleSubmit}>
                 <br></br>
-                <input type="text" name="taskName" value={formData.taskName} onChange={handleChange} placeholder="Task Name" className="bg-gray-50 shadow-xl border border-gray-300 text-slate-700 text-sm rounded-lg block w-full p-2.5 placeholder-slate-400" required />
+                <input type="text"  name="noteName" value={formData.noteName} onChange={handleChange} placeholder="Title" className="focus:outline-none bg-dark-blue-bg text-white text-3xl rounded-lg block w-full p-2.5 placeholder-slate-400" required />
                 <br></br>
-                <input type="text" name="taskDescription" value={formData.taskDescription} onChange={handleChange} placeholder="Task Description" className="bg-gray-50 shadow-xl border border-gray-300 text-slate-700 text-sm rounded-lg block w-full p-2.5 placeholder-slate-400" required />
+                <input type="text" name="noteDescription" value={formData.noteDescription} onChange={handleChange} placeholder="Note Description" className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" />
                 <br></br>
-                <input type="text" name="taskCategory" value={formData.taskCategory} onChange={handleChange} placeholder="Task Category" className="bg-gray-50 shadow-xl border border-gray-300 text-slate-700 text-sm rounded-lg block w-full p-2.5 placeholder-slate-400" required />
+                <input type="text" name="noteCategory" value={formData.noteCategory} onChange={handleChange} placeholder="Note Category" className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" />
                 <br></br>
-                <TextEditor />
-                <button type="submit" className="w-1/2 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
+                <TextEditor handleEditorChange={handleContentChange}/>
+                <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
             </form>
             </div>
         </main>

@@ -11,6 +11,7 @@ interface Note {
     name: string;
     description: string;
     lastEdited: string;
+    id: string;
 }
 
 function Notes() {
@@ -48,6 +49,37 @@ function Notes() {
         setFilteredNotes(filtered);
     };
 
+    const handleDelete = async (id: string, title: string) => {
+        if (!window.confirm(`Delete ${title}?`)) {
+            return;
+        }
+        try {
+            const apiUrl = `/api/notes/${id}/delete`;
+            console.log(id)
+            const requestData = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+
+            const response = await fetch(apiUrl, requestData);
+
+            if (!response.ok) {
+                throw new Error(
+                    `Failed to delete ${title} - ${response.statusText}`
+                );
+            }
+
+            // Remove the deleted note from the state
+            setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+            setFilteredNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+            console.log('Note deleted successfully');
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong while deleting the note.");
+        }
+    };
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const month: number = date.getMonth() + 1;
@@ -69,11 +101,18 @@ function Notes() {
             </div>
             <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-5">
                 <h1 className="text-white text-4xl font-semibold py-5 my-2">My Notes</h1>
+                <div className="w-full flex">
                 <SearchBar onSearch={handleSearch} />
-                <button className="text-white bottom-2.5 bg-btn-purple hover:bg-tips-purple  focus:outline-nonefont-medium rounded-lg text-md px-4 py-2"><Link href="/newnotes">New Note</Link></button>
+                <button className="text-white bottom-2.5 bg-btn-purple hover:bg-tips-purple  focus:outline-nonefont-medium rounded-lg text-md px-4 py-2 ml-3"><Link href="/newnotes">New Note</Link></button>
+                </div>
                 <div className="mt-4">
                     {filteredNotes.map((note, index) => (
-                        <div key={index} className="bg-list-bg hover:bg-tips-purple rounded-lg p-4 shadow-lg mb-4">
+                        <>
+                        <Link key={index} 
+                            href={`/notedetails?noteId=${note.id}`}
+                            as={`/notedetails/${note.id}`}
+                        onClick={()=>{console.log(note.id)}}>
+                        <div key={note.id} className="bg-list-bg hover:bg-tips-purple rounded-lg p-4 shadow-lg mb-4">
                             <div className="flex flex-col lg:flex-row lg:items-center">
                                 <div className="lg:w-1/3 mb-2 lg:mb-0">
                                     <h2 className="text-xl font-semibold mb-2">{note.name}</h2>
@@ -84,6 +123,9 @@ function Notes() {
                                 </div>
                             </div>
                         </div>
+                        </Link>
+                        <button className="text-red-500 font-semibold" onClick={() => handleDelete(note.id, note.name)}>Delete</button>
+                    </>
                     ))}
                 </div>
             </div>
