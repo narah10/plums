@@ -23,3 +23,10 @@ model Note {
   createdAt DateTime @default(now())
   lastEdited DateTime? @updatedAt
 }
+
+model Event {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title   String
+  start   DateTime
+  allDay  Boolean
+}

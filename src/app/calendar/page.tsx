@@ -9,7 +9,10 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import { EventSourceInput } from '@fullcalendar/core/index.js'
+import { PrismaClient } from '@prisma/client';
+import { title } from "process";
 
+const prisma = new PrismaClient();
 
 interface Event {
   title: string;
@@ -57,11 +60,60 @@ export default function Calendar() {
     setIdToDelete(Number(data.event.id))
   }
 
-  function handleDelete() {
-    setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-    setShowDeleteModal(false)
-    setIdToDelete(null)
+  // function handleDelete() {
+  //   setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
+  //   setShowDeleteModal(false)
+  //   setIdToDelete(null)
+  // }
+
+  async function handleDelete(id: string, title: string) {
+    if (!window.confirm(`Delete ${title}?`)) {
+      return;
+    }
+    try {
+      const apiUrl = `/api/events/${id}/delete`;
+      console.log(id)
+      const requestData = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await fetch(apiUrl, requestData);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to delete ${title} - ${response.statusText}`
+        );
+      }
+      setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
+      setShowDeleteModal(false)
+      setIdToDelete(null)
+      console.log('Event deleted successfully');
+
+    } catch (error) {
+      console.error(error)
+      alert("Something went wrong while deleting the event.");
+    }
   }
+
+  // async function handleDelete() {
+  //   try {
+  //     const response = await fetch(`/api/events/${idToDelete}/delete`, {
+  //       method: 'DELETE',
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to delete event: ${response.status} - ${response.statusText}`);
+  //     }
+  //     setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)));
+  //     setShowDeleteModal(false);
+  //     setIdToDelete(null);
+  //   } catch (error) {
+  //     console.error("Error deleting event", error);
+  //   }
+  // }
+  
+
 
   function handleCloseModal() {
     setShowModal(false)
@@ -82,16 +134,48 @@ export default function Calendar() {
     })
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault()
+  //   setAllEvents([...allEvents, newEvent])
+  //   setShowModal(false)
+  //   setNewEvent({
+  //     title: '',
+  //     start: '',
+  //     allDay: false,
+  //     id: 0
+  //   })
+  // }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Event created successfully");
     setAllEvents([...allEvents, newEvent])
-    setShowModal(false)
+    setShowModal(false);
     setNewEvent({
       title: '',
       start: '',
       allDay: false,
       id: 0
-    })
+    });
+    try {
+      const { title, start, allDay } = newEvent;
+      console.log(title, start, allDay)
+      const response = await fetch('/api/events/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, start, allDay }),
+      });
+      console.log("something is happening")
+      if (!response.ok) {
+        throw new Error(`Failed to create event: ${response.status} - ${response.statusText}`);
+      }
+
+      console.log('Event created successfully');
+    } catch (error: any) {
+      console.error("Error creating event:", error.message)
+    }
   }
 
 
@@ -200,7 +284,7 @@ export default function Calendar() {
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button type="button" className="inline-flex w-full justify-center rounded-md bg-lighter-blue px-3 py-2 text-sm 
-                      font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={handleDelete}>
+                      font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleDelete(String(idToDelete), title)}>
                         Delete
                       </button>
                       <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white text-dark-blue-bg border-2- px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-lighter-blue hover:text-white sm:mt-0 sm:w-auto"
