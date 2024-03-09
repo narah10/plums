@@ -26,6 +26,7 @@ export default function Calendar() {
     const [showModal, setShowModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [idToDelete, setIdToDelete] = useState<number | null>(null)
+    const [idToEdit, setIdToEdit] = useState<number | null>(null)
     const [newEvent, setNewEvent] = useState<Event>({
         title: '',
         start: '',
@@ -125,6 +126,12 @@ export default function Calendar() {
     })
     setShowDeleteModal(false)
     setIdToDelete(null)
+  }
+
+  function handleEditModal(id: string) {
+    const event = allEvents.find(event => Number(event.id) === Number(idToEdit))
+    // setNewEvent(event)
+    setShowModal(true)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -235,6 +242,7 @@ export default function Calendar() {
           </div>
         )}
 
+            {/* update Delete Modal */}
         <Transition.Root show={showDeleteModal} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={setShowDeleteModal}>
             <Transition.Child
@@ -287,6 +295,11 @@ export default function Calendar() {
                       font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleDelete(String(idToDelete), title)}>
                         Delete
                       </button>
+                      <button type="button" className="inline-flex w-full justify-center rounded-md bg-lighter-blue px-3 py-2 text-sm 
+                      font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleEditModal(String(idToEdit))}
+                      >
+                        Edit
+                      </button>
                       <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white text-dark-blue-bg border-2- px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-lighter-blue hover:text-white sm:mt-0 sm:w-auto"
                         onClick={handleCloseModal}
                       >
@@ -299,6 +312,8 @@ export default function Calendar() {
             </div>
           </Dialog>
         </Transition.Root>
+
+        {/* end update delete modal */}
         <Transition.Root show={showModal} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={setShowModal}>
             <Transition.Child
