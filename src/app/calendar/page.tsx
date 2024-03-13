@@ -26,7 +26,7 @@ export default function Calendar() {
     const [showModal, setShowModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
-    const [idToDelete, setIdToDelete] = useState<number | null>(null)
+    let [idToDelete, setIdToDelete] = useState<string>('');
     const [idToEdit, setIdToEdit] = useState<number | null>(null)
     const [newEvent, setNewEvent] = useState<Event>({
         title: '',
@@ -35,6 +35,7 @@ export default function Calendar() {
         id: ''
     })
 
+    console.log(newEvent.id);
     const [isLargeScreen, setIsLargeScreen] = useState(true);
     
     useEffect(() => {
@@ -78,72 +79,43 @@ export default function Calendar() {
   }
 
   function handleDeleteModal(data: { event: { id: string } }) {
-    setShowDeleteModal(true)
-    setIdToDelete(Number(data.event.id))
-    console.log(idToDelete)
+    setShowDeleteModal(true);
+    if (data.event.id !== null) {
+      setIdToDelete(data.event.id);
+    }
+    console.log(data.event.id);
   }
 
-  // function handleDelete() {
-  //   setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-  //   setShowDeleteModal(false)
-  //   setIdToDelete(null)
-  // }
 
-  async function handleDelete(id: string, title: string) {
-    if (!window.confirm(`Delete ${title}?`)) {
-      return;
-    }
+  async function handleDelete(idToDelete: string, title: string) {
     try {
-      const apiUrl = `/api/events/${id}/delete`;
-      console.log(id)
+      if (!window.confirm(`Delete ${title}?`)) {
+        return;
+      }
+      
+      const apiUrl = `/api/events/${idToDelete}/delete`;
+      
       const requestData = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       };
-
+      
       const response = await fetch(apiUrl, requestData);
+  
       if (!response.ok) {
-        throw new Error(
-          `Failed to delete ${title} - ${response.statusText}`
-        );
+        throw new Error(`Failed to delete ${title} - ${response.statusText}`);
       }
-      // setAllEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
-      // setShowDeleteModal(false);
-      // setIdToDelete(null);
-      setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-    
-      setShowDeleteModal(false)
-      setIdToDelete(null)
-      // setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-      // setShowDeleteModal(false)
-      // setIdToDelete(null)
+  
+      setAllEvents(allEvents.filter(event => event.id !== idToDelete));
+      setShowDeleteModal(false);
       console.log('Event deleted successfully');
-
     } catch (error) {
       console.error(error)
       alert("Something went wrong while deleting the event.");
     }
   }
-
-  // async function handleDelete() {
-  //   try {
-  //     const response = await fetch(`/api/events/${idToDelete}/delete`, {
-  //       method: 'DELETE',
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error(`Failed to delete event: ${response.status} - ${response.statusText}`);
-  //     }
-  //     setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)));
-  //     setShowDeleteModal(false);
-  //     setIdToDelete(null);
-  //   } catch (error) {
-  //     console.error("Error deleting event", error);
-  //   }
-  // }
-  
-
 
   function handleCloseModal() {
     setShowModal(false)
@@ -154,7 +126,7 @@ export default function Calendar() {
       id: ''
     })
     setShowDeleteModal(false)
-    setIdToDelete(null)
+    // setIdToDelete(null)
   }
 
   function handleEditModal(id: string) {
@@ -236,11 +208,7 @@ export default function Calendar() {
                     right: 'dayGridMonth,timeGridWeek'
                 }}
                 events={allEvents as EventSourceInput}
-                // nowIndicator={true}
-                // editable={true}
-                // droppable={true}
-                // selectable={true}
-                // selectMirror={true}
+      
                 dateClick={handleDateClick}
                 drop={(data) => addEvent(data)}
                 eventClick={(data) => handleDeleteModal(data)}
@@ -259,11 +227,6 @@ export default function Calendar() {
                 right: 'timeGridDay'
             }}
             events={allEvents as EventSourceInput}
-            // nowIndicator={true}
-            // editable={true}
-            // droppable={true}
-            // selectable={true}
-            // selectMirror={true}
             dateClick={handleDateClick}
             drop={(data) => addEvent(data)}
             eventClick={(data) => handleDeleteModal(data)}
