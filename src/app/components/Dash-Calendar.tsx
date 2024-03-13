@@ -51,6 +51,24 @@ export default function DashCalendar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+          const response = await fetch('/api/events/get')
+          if (!response.ok) {
+            throw new Error(`Failed to fetch events: ${response.status} - ${response.statusText}`);
+          }
+          const data = await response.json()
+          console.log(data)
+          setAllEvents(data)
+      }
+      catch(error:any){
+        console.error(`Error fetchin items: ${error.message}`)
+      }
+    }
+    fetchData()
+  }, [])
+
   return (
     <div className="text-purple">
         {isLargeScreen ? (
