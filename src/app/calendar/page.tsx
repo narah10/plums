@@ -287,11 +287,6 @@ export default function Calendar() {
                       font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleDelete(String(idToDelete), title)}>
                         Delete
                       </button>
-                      <button type="button" className="inline-flex w-full justify-center rounded-md bg-lighter-blue px-3 py-2 text-sm 
-                      font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleEditModal(String(idToEdit))}
-                      >
-                        Edit
-                      </button>
                       <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white text-dark-blue-bg border-2- px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-lighter-blue hover:text-white sm:mt-0 sm:w-auto"
                         onClick={handleCloseModal}
                       >
@@ -354,75 +349,6 @@ export default function Calendar() {
                               disabled={newEvent.title === ''}
                             >
                               Create
-                            </button>
-                            <button
-                              type="button"
-                              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-btn-purple hover:bg-tips-purple hover:text-white sm:col-start-1 sm:mt-0"
-                              onClick={handleCloseModal}
-
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </Dialog.Panel>
-                </Transition.Child>
-              </div>
-            </div>
-          </Dialog>
-        </Transition.Root>
-
-        {/* start edit modal */}
-        <Transition.Root show={showEditModal} as={Fragment}>
-          <Dialog as="div" className="relative z-10" onClose={setShowEditModal}>
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <div className="fixed inset-0 bg-dark-blue-bg bg-opacity-75 transition-opacity" />
-            </Transition.Child>
-
-            <div className="fixed inset-0 z-10 overflow-y-auto">
-              <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 text-dark-blue-bg">
-                <Transition.Child
-                  as={Fragment}
-                  enter="ease-out duration-300"
-                  enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                  enterTo="opacity-100 translate-y-0 sm:scale-100"
-                  leave="ease-in duration-200"
-                  leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                  leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                >
-                  <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                    <div>
-                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
-                        <CheckIcon className="h-6 w-6 text-btn-purple" aria-hidden="true" />
-                      </div>
-                      <div className="mt-3 text-center sm:mt-5">
-                        <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                          Update Event
-                        </Dialog.Title>
-                        <form action="submit" onSubmit={handleSubmit}>
-                          <div className="mt-2">
-                            <input type="text" name="title" className="block w-full rounded-md border-0 border-purple py-1.5 text-slate-900 
-                            shadow-sm ring-1 ring-inset ring-btn-purple placeholder:text-slate-400  
-                            sm:text-sm sm:leading-6"
-                              value={newEvent.title} onChange={(e) => handleChange(e)} placeholder="Title" />
-                          </div>
-                          <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                            <button
-                              type="submit"
-                              className="inline-flex w-full justify-center rounded-md bg-btn-purple px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-tips-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple sm:col-start-2 disabled:opacity-25"
-                              disabled={newEvent.title === ''}
-                            >
-                              Update
                             </button>
                             <button
                               type="button"
