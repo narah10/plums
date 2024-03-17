@@ -4,7 +4,7 @@ export const metadata: Metadata = {
     title: 'Favorites'
 }
 
-export default function FavoriteLayout({
+export default function FavoriteNotes({
     children,
 }: {
     children: React.ReactNode;

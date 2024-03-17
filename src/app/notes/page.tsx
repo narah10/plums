@@ -4,13 +4,14 @@ import Navigation from "../components/navigation/page";
 import SearchBar from "../components/SearchBar";
 import Link from 'next/link';
 import Image from 'next/image';
-
+import FavoriteIcon from '@mui/icons-material/Favorite'; 
 
 interface Note {
     name: string;
     description: string;
     lastEdited: string;
     id: string;
+    favorited : boolean;
 }
 
 function Notes() {
@@ -79,6 +80,39 @@ function Notes() {
             alert("Something went wrong while deleting the note.");
         }
     };
+
+    const handleFavorite = async (id: string) => {
+        try {
+            const noteToUpdate = notes.find(note => note.id === id);
+            if (!noteToUpdate) {
+                console.error(`Note with id ${id} not found.`);
+                return;
+            }
+
+            const updatedNotes = notes.map(note =>
+                note.id === id ? { ...note, favorited: !note.favorited } : note
+            );
+            setNotes(updatedNotes);
+            setFilteredNotes(updatedNotes);
+            let noteId = id;
+            const apiUrl = `/api/notes/${noteId}/favorite`;
+            const requestData = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await fetch(apiUrl, requestData);
+
+            if (!response.ok) {
+                throw new Error(`Failed to update favorite state of note ${noteId}`);
+            }
+        } catch (error) {
+            console.error("Error handling favorite:", error);
+            alert("Something went wrong while favoriting the note.");
+        }
+    };
+
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const month: number = date.getMonth() + 1;
@@ -106,11 +140,11 @@ function Notes() {
                 </div>
                 <div className="mt-4">
                     {filteredNotes.map((note, index) => (
-                        <div className='grid grid-cols-[85%_10%] gap-7'>
-                            <Link key={index} 
-                                href={`/notedetails?noteId=${note.id}`}
-                                as={`/notedetails/${note.id}`}
-                            onClick={()=>{console.log(note.id)}}>
+                        <div className='grid grid-cols-[80%_5%_5%] gap-7'>
+                        <Link key={index} 
+                            href={`/notedetails?noteId=${note.id}`}
+                            as={`/notedetails/${note.id}`}
+                        onClick={()=>{console.log(note.id)}}>
                             <div key={note.id} className=" bg-list-bg hover:bg-tips-purple rounded-lg p-4 shadow-lg mb-4">
                                 <div className="flex flex-col lg:flex-row lg:items-center">
                                     <div className="lg:w-1/3 mb-2 lg:mb-0">
@@ -123,6 +157,9 @@ function Notes() {
                                 </div>
                             </div>
                         </Link>
+                        <button className="text-red-500 font-semibold" onClick={() => handleFavorite(note.id)}>
+                            <FavoriteIcon color={note.favorited ? "secondary" : "action"} />
+                        </button>
                         <button className="text-red-500 font-semibold" onClick={() => handleDelete(note.id, note.name)}>
                             <Image alt="" src={'/assets/delete.svg'} width="20" height="20" />
                         </button>
