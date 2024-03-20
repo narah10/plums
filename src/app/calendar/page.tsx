@@ -27,13 +27,20 @@ export default function Calendar() {
     const [showEditModal, setShowEditModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     let [idToDelete, setIdToDelete] = useState<string>('');
-    const [idToEdit, setIdToEdit] = useState<number | null>(null)
+    let [idToEdit, setIdToEdit] = useState<string>('')
     const [newEvent, setNewEvent] = useState<Event>({
         title: '',
         start: '',
         allDay: false,
         id: ''
     })
+    const [editableEvent, setEditableEvent] = useState<Event>({
+      title: '',
+      start: '',
+      allDay: false,
+      id: '',
+    });
+    
 
     console.log(newEvent.id);
     const [isLargeScreen, setIsLargeScreen] = useState(true);
@@ -127,12 +134,7 @@ export default function Calendar() {
     })
     setShowDeleteModal(false)
     // setIdToDelete(null)
-  }
-
-  function handleEditModal(id: string) {
-    const event = allEvents.find(event => Number(event.id) === Number(idToEdit))
-    // setNewEvent(event)
-    setShowEditModal(true)
+    setShowEditModal(false)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -141,18 +143,61 @@ export default function Calendar() {
       title: e.target.value
     })
   }
-
-  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault()
-  //   setAllEvents([...allEvents, newEvent])
-  //   setShowModal(false)
-  //   setNewEvent({
-  //     title: '',
-  //     start: '',
-  //     allDay: false,
-  //     id: 0
-  //   })
+  
+  // function handleDeleteModal(data: { event: { id: string } }) {
+  //   setShowDeleteModal(true);
+  //   if (data.event.id !== null) {
+  //     setIdToDelete(data.event.id);
+  //   }
+  //   console.log(data.event.id);
   // }
+
+  function handleEditModal(data: { event: { id: string } }) {
+    setShowEditModal(true);
+    if (data.event.id !== null) {
+      setIdToEdit(data.event.id);
+    }
+    console.log(data.event.id);
+  }
+
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setEditableEvent({
+      ...editableEvent,
+      title: e.target.value
+    });
+  };
+
+  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Event updated successfully");
+    setAllEvents(allEvents.map(event => event.id === editableEvent.id ? editableEvent : event));
+    setShowEditModal(false);
+    setEditableEvent({
+      title: '',
+      start: '',
+      allDay: false,
+      id: '',
+    });
+    try {
+      const { id, title } = editableEvent;
+      const response = await fetch(`/api/events/${idToDelete}/update`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title }),
+      });
+      console.log("something is happening: edit")
+      if (!response.ok) {
+        throw new Error(`Failed to update event: ${response.status} - ${response.statusText}`);
+      }
+      console.log('Event updated successfully');
+      
+    } catch (error: any) {
+      console.error("Error updating event:", error.message)
+    }
+  }
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -234,7 +279,8 @@ export default function Calendar() {
           </div>
         )}
 
-            {/* update Delete Modal */}
+
+        {/* update Delete Modal */}
         <Transition.Root show={showDeleteModal} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={setShowDeleteModal}>
             <Transition.Child
@@ -287,6 +333,10 @@ export default function Calendar() {
                       font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleDelete(String(idToDelete), title)}>
                         Delete
                       </button>
+                      <button type="button" className="inline-flex w-full justify-center rounded-md bg-lighter-blue px-3 py-2 text-sm 
+                      font-semibold text-white shadow-sm hover:bg-dark-blue-bg sm:ml-3 sm:w-auto" onClick={() => handleEditModal({ event: { id: String(idToDelete) } })}>
+                        Edit
+                      </button>
                       <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white text-dark-blue-bg border-2- px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-lighter-blue hover:text-white sm:mt-0 sm:w-auto"
                         onClick={handleCloseModal}
                       >
@@ -301,6 +351,84 @@ export default function Calendar() {
         </Transition.Root>
 
         {/* end update delete modal */}
+        {/* start edit modal */}
+        <Transition.Root show={showEditModal} as={Fragment}>
+          <Dialog as="div" className="relative z-10" onClose={setShowEditModal}>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-dark-blue-bg bg-opacity-75 transition-opacity" />
+            </Transition.Child>
+
+            <div className="fixed inset-0 z-10 overflow-y-auto">
+              <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 text-dark-blue-bg">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  enterTo="opacity-100 translate-y-0 sm:scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                  leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                >
+                  <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                    <div>
+                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
+                        <CheckIcon className="h-6 w-6 text-btn-purple" aria-hidden="true" />
+                      </div>
+                      <div className="mt-3 text-center sm:mt-5">
+                        <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
+                          Update Event
+                        </Dialog.Title>
+                        <form action="submit" onSubmit={handleUpdate}>
+                          <div className="mt-2">
+                            <input
+                              type="text"
+                              name="title"
+                              className="block w-full rounded-md border-0 border-purple py-1.5 text-slate-900 
+                              shadow-sm ring-1 ring-inset ring-btn-purple placeholder:text-slate-400  
+                              sm:text-sm sm:leading-6"
+                              value={editableEvent.title}
+                              onChange={handleEditChange}
+                              placeholder="Enter New Title"
+                            />
+                          </div>
+                          <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                            <button
+                              type="submit"
+                              className="inline-flex w-full justify-center rounded-md bg-btn-purple px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-tips-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple sm:col-start-2 disabled:opacity-25"
+                              disabled={editableEvent.title === ''}
+                              onClick={() => setShowEditModal(false)}
+                            >
+                              Update
+                            </button>
+                            <button
+                              type="button"
+                              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-btn-purple hover:bg-tips-purple hover:text-white sm:col-start-1 sm:mt-0"
+                              onClick={handleCloseModal}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
+            </div>
+          </Dialog>
+        </Transition.Root>
+        {/* end edit modal */}
+
+        {/* create modal */}
         <Transition.Root show={showModal} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={setShowModal}>
             <Transition.Child
