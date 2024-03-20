@@ -139,10 +139,9 @@ function FavoriteNotes() {
                 <button className="text-white bottom-2.5 bg-btn-purple hover:bg-tips-purple  focus:outline-nonefont-medium rounded-lg text-md px-4 py-2 ml-3"><Link href="/newnotes">New Note</Link></button>
                 </div>
                 <div className="mt-4">
-                    
                     {filteredNotes.map((note, index) => (
-                        <div className='grid grid-cols-[80%_5%_5%] gap-7'>
-                        <Link key={index} 
+                        <div className='grid grid-cols-[80%_5%_5%] gap-7' key={note.id}>
+                        <Link
                             href={`/notedetails?noteId=${note.id}`}
                             as={`/notedetails/${note.id}`}
                         onClick={()=>{console.log(note.id)}}>

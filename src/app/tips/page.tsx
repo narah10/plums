@@ -2,13 +2,13 @@ import Navigation from "../components/navigation/page";
 
 export default function Tips() {
   return (
-<main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
+    <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
       <div className="flex-none">
         <Navigation />
       </div>
       <div className="w-full lg:mx-10 lg:px-5 px-10 lg:my-10 py-5">
         <h1 className="text-white text-4xl font-semibold py-5">Welcome to our Study Tips Page!</h1>
-        <p>Welcome to our Study Tips Page! We understand that effective studying is crucial for academic success, which is why we've curated a collection of invaluable tips to help you make the most out of your study sessions. Whether you're preparing for exams, tackling assignments, or mastering new concepts, implementing these strategies can enhance your learning experience and boost your performance. From creating a distraction-free environment to practicing self-care, each tip is designed to empower you with the tools and techniques needed to excel in your academic endeavors. Dive in and discover the secrets to efficient and effective studying!</p>
+        <p>Welcome to our Study Tips Page! We understand that effective studying is crucial for academic success, which is why we&apos;ve curated a collection of invaluable tips to help you make the most out of your study sessions. Whether you&apos;re preparing for exams, tackling assignments, or mastering new concepts, implementing these strategies can enhance your learning experience and boost your performance. From creating a distraction-free environment to practicing self-care, each tip is designed to empower you with the tools and techniques needed to excel in your academic endeavors. Dive in and discover the secrets to efficient and effective studying!</p>
         <div className="grid gap-10 lg:grid-cols-3 mt-10">
           <div>
             <h2 className="text-2xl font-medium">Study Environment Optimization</h2>
@@ -42,7 +42,6 @@ export default function Tips() {
           </div>
         </div>
       </div>
-      
     </main>
   )
 }

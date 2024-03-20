@@ -140,8 +140,8 @@ function Notes() {
                 </div>
                 <div className="mt-4">
                     {filteredNotes.map((note, index) => (
-                        <div className='grid grid-cols-[80%_5%_5%] gap-7'>
-                        <Link key={index} 
+                        <div className='grid grid-cols-[80%_5%_5%] gap-7' key={note.id}>
+                        <Link
                             href={`/notedetails?noteId=${note.id}`}
                             as={`/notedetails/${note.id}`}
                         onClick={()=>{console.log(note.id)}}>
