@@ -21,6 +21,7 @@ model Note {
   category String?
   content String?
   createdAt DateTime @default(now())
+  favorited Boolean?  @default(false)
   lastEdited DateTime? @updatedAt
 }
 
