@@ -71,7 +71,7 @@ export default function NewNote() {
                 <br></br>
                 <input type="text" name="noteCategory" value={formData.noteCategory} onChange={handleChange} placeholder="Note Category" className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" />
                 <br></br>
-                <TextEditor handleEditorChange={handleContentChange}/>
+                {/* <TextEditor handleEditorChange={handleContentChange}/> */}
                 <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
             </form>
             </div>

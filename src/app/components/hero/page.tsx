@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Quote from '../../../models/quotes';
 import quotesList from '../../../data/quotes.json';
-import { Dialog } from '@headlessui/react';
-import AddNewTask from '../task_form/page';
+import Link from 'next/link';
 
 export default function Hero() {
     const [quote, setQuote] = useState<string>("");
@@ -28,7 +27,8 @@ export default function Hero() {
                 <p className="text-white py-1 md:text-lg">{quote}</p>
                 <h2 className="text-white font-light py-1 text-md">{author}</h2>
             </div>
-            <button onClick={() => setIsOpen(true)}>
+            <button>
+                <Link href="/newnotes">
                 <div id="add-task-btn" className="bg-gray md:py-5 md:px-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
                     <p className="text-dark-purple flex p-3"><span className="md:hidden">Add&nbsp;</span>New Topic</p>
                     <div className="hidden md:block md:mb-4">
@@ -37,13 +37,8 @@ export default function Hero() {
                         </svg>
                     </div>
                 </div>
+                </Link>
             </button>
-            <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-            <div className="fixed inset-0 bg-dark-blue-bg bg-opacity-85 " aria-hidden="true" />
-                <Dialog.Panel>
-                    <AddNewTask />
-                </Dialog.Panel>
-            </Dialog>
         </div>
     );
 }

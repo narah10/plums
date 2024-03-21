@@ -5,14 +5,18 @@ import SearchBar from "../components/SearchBar";
 import Link from 'next/link';
 import Image from 'next/image';
 import FavoriteIcon from '@mui/icons-material/Favorite'; 
+import Note from '../../models/note';
 
-interface Note {
-    name: string;
-    description: string;
-    lastEdited: string;
-    id: string;
-    favorited : boolean;
-}
+// interface Note {
+//     id: string;
+//     name: string;
+//     description: string | null;
+//     category: string | null;
+//     content: string | null;
+//     createdAt: Date;
+//     lastEdited: Date | null;
+//     favorited: boolean; 
+// }
 
 function Notes() {
     const [notes, setNotes] = useState<Note[]>([]);
