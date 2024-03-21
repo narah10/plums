@@ -1,6 +1,19 @@
 // app/api/todo/[noteId]/favorite/routes.ts
 import { db } from "../../../../../../lib/db";
 import { NextResponse } from "next/server";
+import Note from "../../../../../models/note"
+
+// interface Note {
+//   id: string;
+//   name: string;
+//   description: string | null;
+//   category: string | null;
+//   content: string | null;
+//   createdAt: Date;
+//   lastEdited: Date | null;
+//   favorited: boolean; 
+// }
+
 
 export async function PUT(
   req: Request,
@@ -15,7 +28,7 @@ export async function PUT(
       where: {
         id: params.noteId,
       },
-    });
+    }) as Note | null;
 
     if (!note) {
       return new NextResponse("Note not found", { status: 404 });
@@ -28,7 +41,7 @@ export async function PUT(
       },
       data: {
         favorited: !note.favorited, 
-      },
+      } as Note,
     });
 
     return NextResponse.json(updatedNote, { status: 200 });
