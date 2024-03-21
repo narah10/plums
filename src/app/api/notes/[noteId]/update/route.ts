@@ -2,6 +2,7 @@
 
 import { db } from "../../../../../../lib/db";
 import { NextResponse } from "next/server";
+import Note from "../../../../../models/note"
 
 export async function PUT(
   req: Request,
@@ -23,7 +24,7 @@ export async function PUT(
         description: description,
         category: category,
         favorited: favorited,
-      },
+      } as Note,
     });
 
     return NextResponse.json(updatedNote, { status: 200 });
