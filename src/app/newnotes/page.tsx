@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Navigation from "../components/navigation/page";
 import TextEditor from '../components/TextEditor';
+import Parent from "../components/Parents";
 
 export default function NewNote() {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export default function NewNote() {
         noteDescription: '',
         noteCategory: '',
         noteContent:'',
+        parent: '',
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -37,7 +39,7 @@ export default function NewNote() {
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ noteTitle, noteDescription, createdDate, noteCategory, noteContent }),
+              body: JSON.stringify({ noteTitle, noteDescription, createdDate, noteCategory, noteContent, parent: formData.parent }),
           });
   
           if (!response.ok) {
@@ -50,6 +52,7 @@ export default function NewNote() {
             noteDescription: '',
             noteCategory: '',
             noteContent:'',
+            parent: '',
           });
 
           console.log('Task added successfully');
@@ -57,6 +60,26 @@ export default function NewNote() {
           console.error('Error adding task:', error.message);
       }
   }
+
+  const handleNoteSelect = async (selectedNoteId: string) => {
+    console.log("Selected note ID:", selectedNoteId); // Log the selected note ID
+
+    try {
+        const response = await fetch(`/api/notes/${selectedNoteId}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch parent note details: ${response.status}`);
+        }
+        const { name } = await response.json();
+        console.log("Fetched parent title:", name); // Log the fetched parent title
+        setFormData(prevState => ({
+            ...prevState,
+            parent: name, // Set parent to the title of the selected note
+        }));
+    } catch (error) {
+        console.error('Error fetching parent note details:', error);
+    }
+};
+
     return (
         <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
             <div className="flex-none">
@@ -70,6 +93,8 @@ export default function NewNote() {
                 <input type="text" name="noteDescription" value={formData.noteDescription} onChange={handleChange} placeholder="Note Description" className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" />
                 <br></br>
                 <input type="text" name="noteCategory" value={formData.noteCategory} onChange={handleChange} placeholder="Note Category" className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" />
+                <br></br>
+                <Parent onSelect={handleNoteSelect} />
                 <br></br>
                 {/* <TextEditor handleEditorChange={handleContentChange}/> */}
                 <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>

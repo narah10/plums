@@ -5,22 +5,22 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-
-    // detsrtucture notesTitle from the incoming request
-    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent } = await req.json(); 
+    // Destructure properties from the incoming request
+    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent, parent } = await req.json(); 
 
     if (!noteTitle) {
       return new NextResponse("Title required", { status: 400 });
     }
 
-    // Create and save todo on the database
+    // Create and save note in the database
     const note = await db.note.create({
       data: {
         name: noteTitle,
         description: noteDescription,
         category: noteCategory,
         content: noteContent,
-        createdAt: createdDate
+        createdAt: createdDate,
+        parent: parent 
       },
     });
 
