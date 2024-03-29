@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Navigation from "../../components/navigation/page";
+import Parent from "../../components/Parents";
 
 
 interface Note {
@@ -9,6 +10,7 @@ interface Note {
     description: string;
     lastEdited: string;
     category: string;
+    parent: string;
 }
 
 const NoteDetails: React.FC = () => {
@@ -30,6 +32,8 @@ const NoteDetails: React.FC = () => {
                 const data: Note = await response.json();
                 setNote(data);
                 setEditedNote(data); // Initialize editedNote with the fetched note data
+
+                console.log('Fetched note details:', data);
             } catch (error: any) {
                 console.error('Error fetching note details:', error.message);
             }
@@ -75,11 +79,33 @@ const NoteDetails: React.FC = () => {
             console.error('Error updating note:', error.message);
         }
     };
+
+    
+    const handleNoteSelect = async (selectedNoteId: string) => {
+        console.log("Selected note ID:", selectedNoteId); // Log the selected note ID
+    
+        try {
+            const response = await fetch(`/api/notes/${selectedNoteId}`);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch parent note details: ${response.status}`);
+            }
+            const { name } = await response.json();
+            console.log("Fetched parent title:", name); // Log the fetched parent title
+            setEditedNote(prevState => ({
+                ...prevState!,
+                parent: name, // Set parent to the title of the selected note
+            }));
+        } catch (error) {
+            console.error('Error fetching parent note details:', error);
+        }
+    };
     
 
     if (!note) {
         return <div>Loading...</div>;
     }
+
+    
 
     return (
         <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
@@ -115,6 +141,16 @@ const NoteDetails: React.FC = () => {
                         value={editMode ? editedNote?.category : note.category} 
                         onChange={handleInputChange}
                         placeholder="Note Category" 
+                        className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" 
+                        disabled={!editMode}
+                    />
+                    <br />
+                    <input 
+                        type="text" 
+                        name="parent" 
+                        value={editMode ? editedNote?.parent : note.parent} 
+                        onChange={handleInputChange}
+                        placeholder="Note Parent" 
                         className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" 
                         disabled={!editMode}
                     />

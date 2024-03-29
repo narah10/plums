@@ -23,6 +23,7 @@ model Note {
   createdAt DateTime @default(now())
   favorited Boolean?  @default(false)
   lastEdited DateTime? @updatedAt
+  parent String?
 }
 
 model Event {
