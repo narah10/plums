@@ -5,22 +5,27 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-
-    // detsrtucture notesTitle from the incoming request
-    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent } = await req.json(); 
+    // Destructure noteTitle and other fields from the incoming request
+    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent, tagId, tagName } = await req.json(); 
 
     if (!noteTitle) {
       return new NextResponse("Title required", { status: 400 });
     }
 
-    // Create and save todo on the database
+    // Create the note and associate it with the tag if tagId and tagName are provided
     const note = await db.note.create({
       data: {
         name: noteTitle,
         description: noteDescription,
         category: noteCategory,
         content: noteContent,
-        createdAt: createdDate
+        createdAt: createdDate,
+        labels: tagId && tagName ? {
+          connectOrCreate: {
+            where: { name: tagName }, // Use the tag name to find or create the tag
+            create: { name: tagName }  // Create the tag if it doesn't exist
+          }
+        } : undefined
       },
     });
 

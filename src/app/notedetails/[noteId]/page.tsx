@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Navigation from "../../components/navigation/page";
-
+import TextEditor from '../../components/TextEditor';
 
 interface Note {
     name: string;
@@ -119,6 +119,7 @@ const NoteDetails: React.FC = () => {
                         disabled={!editMode}
                     />
                     <br />
+                    {/* <TextEditor /> */}
                     {editMode ? (
                         <button 
                             type="button" 

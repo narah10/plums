@@ -7,6 +7,7 @@ export default interface Note {
   createdAt: string;
   lastEdited: string;
   favorited: boolean; 
+  labelIDs: string[];
 }
 
 // interface Note {
