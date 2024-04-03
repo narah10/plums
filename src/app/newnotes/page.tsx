@@ -1,7 +1,24 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import Navigation from "../components/navigation/page";
-import TextEditor from '../components/TextEditor';
+// import TextEditor from '../components/TextEditor';
+import dynamic from 'next/dynamic';
+
+const TextEditor = dynamic(() => import("../components/TextEditor"), {
+    ssr: false,
+  });
+
+// Define a type for the usePathname hook
+type UsePathname = () => string;
+
+// Import usePathname conditionally for client-side usage
+let usePathname: UsePathname | undefined;
+if (typeof window !== 'undefined') {
+    // TypeScript requires dynamic import syntax for conditional imports
+    import('next/navigation').then(module => {
+        usePathname = module.usePathname;
+    });
+}
 
 export default function NewNote() {
     const [formData, setFormData] = useState({
@@ -13,6 +30,7 @@ export default function NewNote() {
         selectedTag: null as { id: string; name: string } | null,
         tags: [] as { id: string; name: string }[],
     });
+
 
     useEffect(() => {
         fetchTags();
