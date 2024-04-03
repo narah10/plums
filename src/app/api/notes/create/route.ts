@@ -5,14 +5,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    // Destructure properties from the incoming request
-    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent, parent } = await req.json(); 
+    // Destructure noteTitle and other fields from the incoming request
+    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent, tagId, tagName } = await req.json(); 
 
     if (!noteTitle) {
       return new NextResponse("Title required", { status: 400 });
     }
 
-    // Create and save note in the database
+    // Create the note and associate it with the tag if tagId and tagName are provided
     const note = await db.note.create({
       data: {
         name: noteTitle,
@@ -20,10 +20,14 @@ export async function POST(req: Request) {
         category: noteCategory,
         content: noteContent,
         createdAt: createdDate,
-        parent: parent 
+        labels: tagId && tagName ? {
+          connectOrCreate: {
+            where: { name: tagName }, // Use the tag name to find or create the tag
+            create: { name: tagName }  // Create the tag if it doesn't exist
+          }
+        } : undefined
       },
     });
-
     return NextResponse.json(note, { status: 201 }); // Respond with the created note
   } catch (error) {
     console.log("[POST NOTE]", error);

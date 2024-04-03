@@ -13,7 +13,7 @@ export async function PUT(
       return new NextResponse("Not found", { status: 404 });
     }
 
-    const { name, description, category, favorited, parent } = await req.json(); 
+    const { name, description, category, favorited } = await req.json(); 
 
     const updatedNote = await db.note.update({
       where: {
@@ -24,7 +24,6 @@ export async function PUT(
         description: description,
         category: category,
         favorited: favorited,
-        parent: parent,
       } as Note,
     });
 
