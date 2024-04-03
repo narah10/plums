@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import Navigation from "../components/navigation/page";
 // import TextEditor from '../components/TextEditor';
 import dynamic from 'next/dynamic';
+import Parent from "../components/Parents"
 
 const TextEditor = dynamic(() => import("../components/TextEditor"), {
     ssr: false,
@@ -26,6 +27,7 @@ export default function NewNote() {
         noteDescription: '',
         noteCategory: '',
         noteContent:'',
+        parent: '',
         newTagName: '',
         selectedTag: null as { id: string; name: string } | null,
         tags: [] as { id: string; name: string }[],
@@ -101,6 +103,7 @@ export default function NewNote() {
                     createdDate,
                     noteCategory,
                     noteContent,
+                    parent: formData.parent,
                     tagId: formData.selectedTag ? formData.selectedTag.id : null, // Pass the selected tag ID
                     tagName: formData.selectedTag ? formData.selectedTag.name : null, // Pass the selected tag name
                 }),
@@ -116,6 +119,7 @@ export default function NewNote() {
                 noteDescription: '',
                 noteCategory: '',
                 noteContent:'',
+                parent: '',
                 newTagName: '',
                 selectedTag: null,
                 tags: [],
@@ -154,6 +158,26 @@ export default function NewNote() {
         }
     };
 
+    const handleNoteSelect = async (selectedNoteId: string) => {
+        console.log("Selected note ID:", selectedNoteId); // Log the selected note ID
+    
+        try {
+            const response = await fetch(`/api/notes/${selectedNoteId}`);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch parent note details: ${response.status}`);
+            }
+            const { name } = await response.json();
+            console.log("Fetched parent title:", name); // Log the fetched parent title
+            setFormData(prevState => ({
+                ...prevState,
+                parent: name, // Set parent to the title of the selected note
+            }));
+        } catch (error) {
+            console.error('Error fetching parent note details:', error);
+        }
+    };
+    
+
     return (
         <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
             <div className="flex-none">
@@ -181,6 +205,7 @@ export default function NewNote() {
                         </select>
                         
                         <TextEditor content="" handleEditorChange={handleContentChange}/>
+                        <Parent onSelect={handleNoteSelect} />
                     <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
                 </form>
                 {formData.selectedTag === null && (

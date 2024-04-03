@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Navigation from "../../components/navigation/page";
 import TextEditor from '../../components/TextEditor';
+import Parent from "../../components/Parents";
 
 interface Note {
     name: string;
@@ -10,6 +11,7 @@ interface Note {
     lastEdited: string;
     category: string;
     content: string;
+    parent: string;
 }
 
 const NoteDetails: React.FC = () => {
@@ -130,6 +132,18 @@ const NoteDetails: React.FC = () => {
                     />
                     <br />
                     <TextEditor handleEditorChange={handleEditorChange} content={note.content} />
+
+                    <br />
+                    <input 
+                        type="text" 
+                        name="parent" 
+                        value={editMode ? editedNote?.parent : note.parent} 
+                        onChange={handleInputChange}
+                        placeholder="Note Parent" 
+                        className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" 
+                        disabled={!editMode}
+                    />
+                    <br />
 
                     {editMode ? (
                         <button 

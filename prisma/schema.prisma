@@ -22,6 +22,7 @@ model Note {
   content String?
   createdAt DateTime @default(now())
   favorited Boolean?  @default(false)
+  parent String?
   lastEdited DateTime? @updatedAt
   // Define the many-to-many relationship with Tag
   labelIDs String[]   @db.ObjectId
