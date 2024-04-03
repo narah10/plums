@@ -9,6 +9,7 @@ interface Note {
     description: string;
     lastEdited: string;
     category: string;
+    content: string;
 }
 
 const NoteDetails: React.FC = () => {
@@ -16,7 +17,6 @@ const NoteDetails: React.FC = () => {
     const [note, setNote] = useState<Note | null>(null);
     const [editedNote, setEditedNote] = useState<Note | null>(null);
     const [editMode, setEditMode] = useState<boolean>(false);
-
     useEffect(() => {
         const fetchNoteDetails = async () => {
             try {
@@ -28,19 +28,23 @@ const NoteDetails: React.FC = () => {
                     throw new Error(`Failed to fetch note details: ${response.status} - ${response.statusText}`);
                 }
                 const data: Note = await response.json();
+                // Ensure that the content field is included in the initial state of editedNote
+                setEditedNote({
+                    ...data,
+                    content: '', // Initialize content field to an empty string
+                });
                 setNote(data);
-                setEditedNote(data); // Initialize editedNote with the fetched note data
             } catch (error: any) {
                 console.error('Error fetching note details:', error.message);
             }
         };
-
+    
         fetchNoteDetails();
     }, [noteId]);
-
+    
+    
     const handleEditModeToggle = () => {
         if (note) {
-            // Enter edit mode: Copy the current note data to editedNote
             setEditedNote({ ...note });
         }
         setEditMode(!editMode);
@@ -51,6 +55,12 @@ const NoteDetails: React.FC = () => {
         setEditedNote(prevState => ({
             ...prevState!,
             [name]: value
+        }));
+    };
+    const handleEditorChange = (content: string) => {
+        setEditedNote(prevState => ({
+            ...prevState!,
+            content: content
         }));
     };
 
@@ -80,7 +90,7 @@ const NoteDetails: React.FC = () => {
     if (!note) {
         return <div>Loading...</div>;
     }
-
+    console.log(note.content)
     return (
         <main className="lg:flex min-h-screenp-24 bg-dark-blue-bg">
             <div className="flex-none">
@@ -119,12 +129,13 @@ const NoteDetails: React.FC = () => {
                         disabled={!editMode}
                     />
                     <br />
-                    {/* <TextEditor /> */}
+                    <TextEditor handleEditorChange={handleEditorChange} content={note.content} />
+
                     {editMode ? (
                         <button 
                             type="button" 
                             className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10 text-center shadow-xl"
-                            onClick={handleSaveNote} // Call handleSaveNote onClick instead of onSubmit
+                            onClick={handleSaveNote}
                         >
                             Save Note
                         </button>

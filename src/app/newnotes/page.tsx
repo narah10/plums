@@ -162,7 +162,7 @@ export default function NewNote() {
                             ))}
                         </select>
                         
-                        <TextEditor handleEditorChange={handleContentChange}/>
+                        <TextEditor content="" handleEditorChange={handleContentChange}/>
                     <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
                 </form>
                 {formData.selectedTag === null && (
