@@ -79,7 +79,6 @@ function Notes() {
     };
 
     const handleTags = (event: React.ChangeEvent<HTMLSelectElement>) => {
-
         // const { name, value } = event.target;
         // setTag(prevTag => ({
         //     ...prevTag,

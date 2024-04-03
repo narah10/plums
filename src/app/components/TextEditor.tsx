@@ -36,7 +36,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ handleEditorChange }) => {
   //   theme: 'snow', // or 'bubble'
   // });
   return (
-    <div className='bg-white'>
+    <div className='bg-white' style={{ width: 1000, height: 100 }}>
     <ReactQuill
       theme='snow'
       value={value}

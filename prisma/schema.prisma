@@ -23,9 +23,7 @@ model Note {
   createdAt DateTime @default(now())
   favorited Boolean?  @default(false)
   lastEdited DateTime? @updatedAt
-  // Define the many-to-many relationship with Tag
-  labelIDs String[]   @db.ObjectId
-  labels Label[] @relation(fields: [labelIDs], references: [id])
+  labels LabelsOnNotes[]
 }
 
 model Event {
@@ -35,6 +33,24 @@ model Event {
   allDay  Boolean
 }
 
+model Label {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  notes LabelsOnNotes[]
+}
+
+model LabelsOnNotes {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  note       Note     @relation(fields: [noteId], references: [id])
+  noteId     String   @db.ObjectId
+  label      Label    @relation(fields: [labelId], references: [id])
+  labelId    String   @db.ObjectId
+  assignedAt DateTime @default(now())
+
+  @@unique([noteId, labelId])
+}
+
+
 // Define the Tag model
 // model Tag {
 //   id     String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -43,9 +59,9 @@ model Event {
   // notes  Note[]  @relation(fields: [notesIDs], references: [id])
 // }
 
-model Label {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  name   String  @unique
-  notesIDs String[] @db.ObjectId
-  notes  Note[]  @relation(fields: [notesIDs], references: [id])
-}
+// model Label {
+//   id     String  @id @default(auto()) @map("_id") @db.ObjectId
+//   name   String  @unique
+//   notesIDs String[] @db.ObjectId
+//   notes  Note[]  @relation(fields: [notesIDs], references: [id])
+// }

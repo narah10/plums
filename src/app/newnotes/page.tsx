@@ -156,11 +156,10 @@ export default function NewNote() {
                             onChange={handleChange}
                             className="focus:outline-none bg-grayish-purple text-white text-xl rounded-lg mb-5 block w-1/5 p-2.5 placeholder-slate-400"
                         >
-<option value="create_new_tag">Create New Tag</option>
+                            <option value="create_new_tag">Create New Tag</option>
                             {formData.tags.map(tag => (
                                 <option key={tag.id} value={tag.name}>{tag.name}</option>
                             ))}
-                            
                         </select>
                         
                         <TextEditor handleEditorChange={handleContentChange}/>
