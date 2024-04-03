@@ -28,7 +28,6 @@ export async function POST(req: Request) {
         } : undefined
       },
     });
-
     return NextResponse.json(note, { status: 201 }); // Respond with the created note
   } catch (error) {
     console.log("[POST NOTE]", error);
