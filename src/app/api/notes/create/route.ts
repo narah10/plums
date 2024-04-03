@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       return new NextResponse("Title required", { status: 400 });
     }
 
-    // Create the note and associate it with the tag
+    // Create the note and associate it with the tag if tagId and tagName are provided
     const note = await db.note.create({
       data: {
         name: noteTitle,
@@ -20,17 +20,12 @@ export async function POST(req: Request) {
         category: noteCategory,
         content: noteContent,
         createdAt: createdDate,
-        // Associate the note with the tag if tagId and tagName are provided
         labels: tagId && tagName ? {
-          create: {
-            label: {
-              connectOrCreate: {
-                where: { id: tagId },
-                create: { name: tagName }
-              }
-            }
+          connectOrCreate: {
+            where: { name: tagName }, // Use the tag name to find or create the tag
+            create: { name: tagName }  // Create the tag if it doesn't exist
           }
-        } : undefined,
+        } : undefined
       },
     });
 
