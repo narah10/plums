@@ -11,6 +11,8 @@ interface Note {
     lastEdited: string;
     category: string;
     content: string;
+    images: string[];
+    attachments: string[];
     parent: string;
 }
 
@@ -131,9 +133,18 @@ const NoteDetails: React.FC = () => {
                         disabled={!editMode}
                     />
                     <br />
-                    <TextEditor handleEditorChange={handleEditorChange} content={note.content} />
-
+                    {/* <div>
+                        {note.images.map((image, index) => (
+                            <img key={index} src={image} alt={`Image ${index + 1}`} />
+                        ))}
+                    </div>
                     <br />
+                    <div>
+                        {note.attachments.map((attachment, index) => (
+                            <a key={index} href={attachment} target="_blank" rel="noopener noreferrer">{`Attachment ${index + 1}`}</a>
+                        ))}
+                    </div> */}
+                    {/* <br /> */}
                     <input 
                         type="text" 
                         name="parent" 
@@ -143,8 +154,16 @@ const NoteDetails: React.FC = () => {
                         className="focus:outline-none bg-dark-blue-bg text-white text-xl rounded-lg block w-full p-2.5 placeholder-slate-400" 
                         disabled={!editMode}
                     />
+                    {/* <br /> */}
                     <br />
+                    <TextEditor handleEditorChange={handleEditorChange} content={note.content} />
 
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     {editMode ? (
                         <button 
                             type="button" 

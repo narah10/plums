@@ -27,6 +27,8 @@ export default function NewNote() {
         noteDescription: '',
         noteCategory: '',
         noteContent:'',
+        noteImages: [] as string[],
+        noteAttachments: [] as File[],
         parent: '',
         newTagName: '',
         selectedTag: null as { id: string; name: string } | null,
@@ -78,17 +80,18 @@ export default function NewNote() {
         }
     };
 
-    const handleContentChange = (content: string) => {
+    const handleContentChange = (content: string, images: string[]) => {
         setFormData({
           ...formData,
           noteContent: content,
+          noteImages: images,
         });
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const { noteName, noteDescription, noteCategory, noteContent } = formData;
+            const { noteName, noteDescription, noteCategory, noteContent, noteImages, noteAttachments } = formData;
             const createdDate = new Date();
 
             // Create the note with the selected tag information
@@ -103,6 +106,8 @@ export default function NewNote() {
                     createdDate,
                     noteCategory,
                     noteContent,
+                    noteImages,
+                    noteAttachments,
                     parent: formData.parent,
                     tagId: formData.selectedTag ? formData.selectedTag.id : null, // Pass the selected tag ID
                     tagName: formData.selectedTag ? formData.selectedTag.name : null, // Pass the selected tag name
@@ -119,6 +124,8 @@ export default function NewNote() {
                 noteDescription: '',
                 noteCategory: '',
                 noteContent:'',
+                noteImages: [],
+                noteAttachments: [],
                 parent: '',
                 newTagName: '',
                 selectedTag: null,
@@ -175,7 +182,7 @@ export default function NewNote() {
         } catch (error) {
             console.error('Error fetching parent note details:', error);
         }
-    };
+    };    
     
 
     return (
@@ -203,8 +210,9 @@ export default function NewNote() {
                                 <option key={tag.id} value={tag.name}>{tag.name}</option>
                             ))}
                         </select>
-                        
+                        <br></br>
                         <TextEditor content="" handleEditorChange={handleContentChange}/>
+
                         <Parent onSelect={handleNoteSelect} />
                     <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
                 </form>
