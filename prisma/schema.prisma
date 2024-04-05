@@ -20,6 +20,8 @@ model Note {
   description String?
   category String?
   content String?
+  images Json[]
+  attachments Json[]
   createdAt DateTime @default(now())
   favorited Boolean?  @default(false)
   parent String?

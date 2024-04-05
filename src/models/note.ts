@@ -4,6 +4,8 @@ export default interface Note {
   description: string;
   category: string | null;
   content: string | null;
+  images: string[];
+  attachments: string[];
   createdAt: string;
   lastEdited: string;
   favorited: boolean; 

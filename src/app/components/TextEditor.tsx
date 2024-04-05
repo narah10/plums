@@ -3,7 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 interface TextEditorProps {
-  handleEditorChange: (content: string) => void;
+  handleEditorChange: (content: string, images: string[]) => void; // Update handleEditorChange signature
   content: string;
 }
 
@@ -11,16 +11,26 @@ const TextEditor: React.FC<TextEditorProps> = ({ handleEditorChange, content }) 
   const [value, setValue] = useState<string>('');
 
   useEffect(() => {
-    // Set the initial value from the content prop if it exists
     if (content) {
-      console.log(content)
       setValue(content);
     }
   }, [content]);
 
   const handleChange = (content: string) => {
     setValue(content);
-    handleEditorChange(content);
+    // Extract image URLs from the content
+    const imageUrls = extractImageUrls(content);
+    handleEditorChange(content, imageUrls);
+  };
+
+  const extractImageUrls = (content: string): string[] => {
+    const regex = /<img src="(.*?)"/g;
+    const urls: string[] = [];
+    let match;
+    while ((match = regex.exec(content)) !== null) {
+      urls.push(match[1]);
+    }
+    return urls;
   };
 
   return (
@@ -39,7 +49,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ handleEditorChange, content }) 
           ],
         }}
         placeholder='Write a note...'
-        className='text-slate-600 min-h-[200px] rounded-lg p-1'
+        className='text-slate-600 min-h-[200px] rounded-lg p-1 bg-white'
       />
     </div>
   );

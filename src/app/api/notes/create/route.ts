@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     // Destructure noteTitle and other fields from the incoming request
-    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent, parent, tagId, tagName } = await req.json(); 
+    const { noteTitle, noteDescription, createdDate, noteCategory, noteContent, noteImages, noteAttachments, parent, tagId, tagName } = await req.json(); 
 
     if (!noteTitle) {
       return new NextResponse("Title required", { status: 400 });
@@ -19,6 +19,8 @@ export async function POST(req: Request) {
         description: noteDescription,
         category: noteCategory,
         content: noteContent,
+        images: noteImages,
+        attachments: noteAttachments,
         createdAt: createdDate,
         parent: parent,
         labels: tagId && tagName ? {
