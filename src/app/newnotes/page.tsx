@@ -210,10 +210,15 @@ export default function NewNote() {
                                 <option key={tag.id} value={tag.name}>{tag.name}</option>
                             ))}
                         </select>
+                        <Parent onSelect={handleNoteSelect} />
                         <br></br>
                         <TextEditor content="" handleEditorChange={handleContentChange}/>
-
-                        <Parent onSelect={handleNoteSelect} />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                     <button type="submit" className="w-1/3 text-white bg-purple hover:bg-white hover:text-purple font-medium rounded-lg text-md p-2.5 my-10  text-center shadow-xl">Add New Note</button>
                 </form>
                 {formData.selectedTag === null && (
